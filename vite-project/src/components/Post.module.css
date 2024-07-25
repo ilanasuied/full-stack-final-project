@@ -1,0 +1,53 @@
+.post {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px 0;
+  background-color: #000000;
+}
+
+.post h2 {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.post p {
+  margin-bottom: 8px;
+}
+
+.post .author {
+  font-weight: bold;
+}
+
+.post button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.post button:hover {
+  background-color: #0056b3;
+}
+
+.post .likes {
+  margin-top: 8px;
+  font-size: 1.2rem;
+}
+
+.post ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.post .comments {
+  margin-top: 8px;
+}
+
+.post .comment {
+  margin-bottom: 4px;
+  padding-left: 16px;
+  border-left: 2px solid #ccc;
+}
