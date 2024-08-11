@@ -15,6 +15,7 @@ function App() {
         console.error('Error fetching users:', error);
       }
     };
+    
 
     const fetchPosts = async () => {
       try {
