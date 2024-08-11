@@ -1,32 +1,47 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faThumbsUp, faCommentAlt } from '@fortawesome/free-solid-svg-icons';
 import styles from './Post.module.css';
 
 const Post = ({ post }) => {
   const [showComments, setShowComments] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
 
   const toggleComments = () => {
     setShowComments(!showComments);
   };
 
+  const handleLike = () => {
+    setIsLiked(!isLiked);
+  };
+
   return (
     <div className={styles.post}>
-      <h2>{post.title}</h2>
-      <p className={styles.author}>Author: {post.author}</p>
-      <p>{post.content}</p>
-      <button onClick={toggleComments}>
-        {showComments ? 'Hide Comments' : 'Show Comments'}
-      </button>
+      <p className={styles.author}>{post.author}</p>
+      <div className={styles.postContent}>
+        <h2>{post.title}</h2>
+        <p>{post.content}</p>
+      </div>
+      
       {showComments && (
         <ul className={styles.comments}>
           {post.comments.map((comment, index) => (
             <li key={index} className={styles.comment}>
-              {comment.content} by {comment.commenter}
+              <b>{comment.commenter}</b>: {comment.content} 
             </li>
           ))}
         </ul>
       )}
       <div className={styles.likes}>
         ❤️ {post.likes.length}
+      </div>
+      <div className={styles.actions}>
+        <FontAwesomeIcon 
+          icon={faThumbsUp} 
+          className={`${styles.icon} ${isLiked ? styles.liked : ''}`} 
+          onClick={handleLike} 
+        />
+        <FontAwesomeIcon icon={faCommentAlt} className={styles.icon} onClick={toggleComments} />
       </div>
     </div>
   );
