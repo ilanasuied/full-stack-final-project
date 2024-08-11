@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from './Login.module.css';
-//page login en react
+
 
 
 const Login = () =>{
+    
     return(
-        <div>
-            <h1>login page</h1>
+        <div className={styles.container}>
+            <h1>LogIn</h1>
+            <input type = "text" placeholder="name"></input>
+            <input type = "password" placeholder="password"></input>
+            <div className={styles.loginBnt}>Login</div>
+            <p className={styles.textLogin}></p>
+
         </div>
+    
 
     )
 }
