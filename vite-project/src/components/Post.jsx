@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faCommentAlt } from '@fortawesome/free-solid-svg-icons';
-import styles from './Post.module.css';
+import styles from '../css/Post.module.css';
 
 const Post = ({ post }) => {
   const [showComments, setShowComments] = useState(false);
