@@ -1,22 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import styles from '../css/Message.module.css';
 
 const Message = () => {
   const [allMessages, setAllMessages] = useState([]);
-
+  const { id } = useParams();
+  const currentUser = 1;
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/api/messages/1');
-        
-        // Fusionner les messages envoyés et reçus
-        const mergedMessages = [...response.data.sentMessages, ...response.data.receivedMessages];
-        
-        // Trier les messages fusionnés par ordre croissant de created_at
-        const sortedMessages = mergedMessages.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
-        
-        setAllMessages(sortedMessages);
+        const response = await axios.get(`http://localhost:3001/api/messages/${id}`);
+        setAllMessages(response.data);
+        console.log(response.data);
       } catch (error) {
         console.error('Error fetching messages:', error);
       }
@@ -25,21 +23,40 @@ const Message = () => {
     fetchMessages();
   }, []);
 
+  const goBack = () => {
+    window.history.back();
+  };
+
   return (
-    <div className={styles.container}>
-      <ul>
-        {allMessages.map(message => (
-          <li 
-            key={message.message_id} 
-            className={message.sender_username ? styles.receivedMessage : styles.sentMessage}
-          >
-            <p>{message.content}</p>
-            <p>{new Date(message.created_at).toLocaleString()}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <div className={styles.container}>
+        <button onClick={goBack} className={styles.backButton}>
+          <FontAwesomeIcon icon={faArrowLeft} />
+        </button>
+        <ul>
+          {allMessages.map(message => (
+            <li
+              key={message.message_id}
+              className={message.sender_id != currentUser ? styles.sentMessage : styles.receivedMessage}
+            >
+              <p>{message.content}</p>
+              <p className={styles.date}>{new Date(message.created_at).toLocaleString()}</p>
+            </li>
+          ))}
+        </ul>
+        <div className={styles.inputContainer}>
+          <input
+            type="text"
+            placeholder="Typing..."
+            className={styles.inputTyping}
+          />
+          <button className={styles.sendButton}>
+            <FontAwesomeIcon icon={faPaperPlane} />
+          </button>
+        </div>
+      </div>
+    </>
   );
-}
+};
 
 export default Message;
