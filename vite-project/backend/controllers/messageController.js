@@ -41,6 +41,22 @@ export const getMessagesById = async (req, res) => {
   }
 };
 
-export const createMessage = () => { };
+
+export const createMessage = async (req, res) => {
+  const { content, sender_id, conversation_id, recipient_id } = req.body;
+  try {
+    const connection = await createConnection();
+    const [result] = await connection.query(`
+      INSERT INTO Messages (conversation_id, sender_id, recipient_id, content)
+      VALUES (${conversation_id}, ${sender_id}, ${recipient_id}, '${content}');
+      `);
+
+    await connection.end();
+    
+    res.status(201).json({ message_id: result.insertId, content, sender_id, conversation_id, created_at: new Date() });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 
 

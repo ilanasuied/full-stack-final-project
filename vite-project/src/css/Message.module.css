@@ -23,7 +23,7 @@ ul {
 }
 
 .receivedMessage {
-  background-color: #DCF8C6;
+  background-color: #a9bbce;
   color: #000;
   padding: 10px;
   border-radius: 15px;
@@ -100,12 +100,12 @@ ul {
 .sendButton {
   background: none;
   border: none;
-  color: #2bc735;
+  color: #90aac4;
   font-size: 1.2rem;
   cursor: pointer;
   margin-left: 10px;
 }
 
 .sendButton:hover {
-  color: #578a47;
+  color: #8e8e8e;
 }

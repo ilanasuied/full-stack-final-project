@@ -20,8 +20,8 @@ function MessagePage() {
     fetchMessages();
   }, []);
 
-  const userHandle = (conversation_id) => {
-    navigate(`/messages/${conversation_id}`);
+  const userHandle = (conversation_id, user_id) => {
+    navigate(`/messages/${conversation_id}`, { state: user_id});
   }
 
 
@@ -30,7 +30,7 @@ function MessagePage() {
       <h1>Users Who Started a Conversation</h1>
       <ul>
         {messages.map((message, index) => (
-          <li key={index} onClick={() => userHandle(message.conversation_id)} className={styles.liCont}>{message.username}</li>
+          <li key={index} onClick={() => userHandle(message.conversation_id, message.user_id)} className={styles.liCont}>{message.username}</li>
         ))}
       </ul>
     </div>
