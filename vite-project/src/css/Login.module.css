@@ -2,7 +2,7 @@
 *{
     margin : 0;
     box-sizing : border-box;
-    font-family: "Roboto+Slab";
+    /* font-family: "Roboto+Slab"; */
     
 }
 
@@ -14,10 +14,15 @@
 
 
 body{
+    height : 100vh;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #DDD0C8;
+   
+    
+    
 }
 
 .container{
@@ -30,22 +35,31 @@ body{
     flex-direction: column;
     justify-content: space-around;
     border: 0.1em solid white;
-    background-color: rgba(255, 255, 255, 0.8)
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5)
    
 }
 
 
 
-input{
+.inputLogin{
     border : none;
     border-radius: 0.5em;
     height: 2em;
     width: 70%;
     text-align: center;
-    padding: 2em;
-    font-size: 1em;
+    padding: 1.1em;
+    font-size: 0.9em;
+    font-weight: bolder;
+    color: black;
+    transition: font-size 0.3s ease-in-out;
     
 }
+input:focus, 
+input:not(:placeholder-shown) { 
+    font-size: 1.5em; 
+}
+
 
 .loginBnt{
     width: 40%;

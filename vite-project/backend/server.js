@@ -17,3 +17,4 @@ app.use('/api', messageRoutes);
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
+ 
