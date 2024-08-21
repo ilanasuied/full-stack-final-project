@@ -31,29 +31,27 @@ export const handleUser = async (req, res) => {
 
   try {
     const connection = await createConnection();
-
-    // Vérifiez si l'utilisateur existe déjà
     const [users] = await connection.query('SELECT * FROM Users WHERE username = ?', [username]);
     const user = users[0];
 
     if (action === 'signup') {
       if (user) {
-        // Si l'utilisateur existe déjà, renvoyez une erreur pour l'inscription
+ 
         return res.status(400).json({ message: 'Username already taken' });
       } else {
-        // Créer un nouvel utilisateur
+      
         const hashedPassword = await bcrypt.hash(password, 10);
         const [result] = await connection.query('INSERT INTO Users (username, email, password_hash, role, created_at) VALUES (?, ?, ?, ?, ?)', 
           [username, email, hashedPassword, role, created_at]);
 
-        // Obtenir l'ID généré pour l'utilisateur
+   
         const userId = result.insertId; 
         
         res.status(201).json({ message: 'User created successfully', user: { id: userId, username } });
       }
     } else if (action === 'login') {
       if (user) {
-        // Authentifier l'utilisateur existant
+    
         const isPasswordValid = await bcrypt.compare(password, user.password_hash);
 
         if (!isPasswordValid) {
