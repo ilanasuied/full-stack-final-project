@@ -1,20 +1,19 @@
-import React, { useState } from 'react';
-import Boardstyles from '../css/Board.module.css';
+import React from 'react';
+import MessagePage from './MessagePage';
+import styles from '../css/Board.module.css';
 
-
-const Board = () => {
-
-
-    
-
-    return (
-       <div className={Boardstyles.user}>
-       
-        </div>
-
-
-    );   
-
+function Board() {
+  return (
+    <div className={styles.container}>
+      <div className={styles.sidebar}>
+        <MessagePage />
+      </div>
+      <div className={styles.content}>
+        <h1>Tableau de bord principal</h1>
+        <p>Bienvenue sur votre tableau de bord. Sélectionnez un utilisateur à partir de la liste pour voir les messages.</p>
+      </div>
+    </div>
+  );
 }
 
 export default Board;

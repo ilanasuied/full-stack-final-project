@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faComments } from '@fortawesome/free-solid-svg-icons';
 import styles from '../css/MessagePage.module.css';
+
+
 
 
 function MessagePage() {
@@ -21,13 +25,15 @@ function MessagePage() {
   }, []);
 
   const userHandle = (conversation_id, user_id) => {
-    navigate(`/messages/${conversation_id}`, { state: user_id});
+    navigate(`/messages/${conversation_id}`, { state: user_id });
   }
 
 
   return (
     <div>
-      <h1>Users Who Started a Conversation</h1>
+      <div className={styles.messageIconContainer}>
+        <FontAwesomeIcon icon={faComments} className={styles.messageIcon} />
+      </div>      
       <ul>
         {messages.map((message, index) => (
           <li key={index} onClick={() => userHandle(message.conversation_id, message.user_id)} className={styles.liCont}>{message.username}</li>

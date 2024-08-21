@@ -48,3 +48,16 @@ ul {
     padding: 12px;
   }
 }
+
+
+.messageIconContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  margin-bottom: 20px; 
+}
+
+.messageIcon {
+  font-size: 2rem; 
+  color: #7b7b7b; 
+}
