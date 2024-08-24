@@ -11,7 +11,7 @@ const Message = () => {
   const { id } = useParams();
   const location = useLocation();
   const currentUser = 1;
-  const  recipientId = location.state;
+  const recipientId = location.state;
 
   useEffect(() => {
     const fetchMessages = async () => {

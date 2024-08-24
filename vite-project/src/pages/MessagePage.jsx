@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComments } from '@fortawesome/free-solid-svg-icons';
+import { faComments, faPlus } from '@fortawesome/free-solid-svg-icons';
 import styles from '../css/MessagePage.module.css';
 
 
@@ -33,12 +33,15 @@ function MessagePage() {
     <div>
       <div className={styles.messageIconContainer}>
         <FontAwesomeIcon icon={faComments} className={styles.messageIcon} />
-      </div>      
+      </div>
       <ul>
         {messages.map((message, index) => (
           <li key={index} onClick={() => userHandle(message.conversation_id, message.user_id)} className={styles.liCont}>{message.username}</li>
         ))}
       </ul>
+      <div className={styles.messageIconContainer}>
+        <FontAwesomeIcon icon={faPlus} className={styles.messageIcon} />
+      </div>
     </div>
   );
 }
