@@ -6,28 +6,90 @@ export const getAllUsers = async (req, res) => {
   try {
     const connection = await createConnection();
     const [users] = await connection.query(`
-        SELECT Users.username, Users.email, Profiles.bio, Profiles.profile_pic
+        SELECT *
         FROM Users
-        JOIN Profiles ON Users.user_id = Profiles.user_id
+        WHERE Users.role <> 'ADMIN';
       `);
     await connection.end();
     res.status(200).json(users);
+
+
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
 
+export const getUserById = async (req, res) => {
+
+  try {
+    const connection = await createConnection();
+    const userId = req.params.id;
+    const [users] = await connection.query('SELECT * FROM Users WHERE user_id = ?', [userId]);
+    const user = users[0];
+
+    await connection.end();
 
 
-export const getUserById = () => { };
-export const updateUser = () => { };
-export const deleteUser = () => { };
+    res.status(200).json(user);
+    
+    
+
+    
+  } catch (error) {
+    console.error('Error:', error.message);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+
+export const updateUser = () => { 
+
+
+};
+
+
+export const deleteUser = async (req, res) => { 
+  const { id } = req.params; 
+
+  if (!id) {
+    return res.status(400).json({ message: 'User ID is required' });
+  }
+
+  try {
+    const connection = await createConnection();
+
+    // Supprimer les likes associés aux commentaires des posts de cet utilisateur
+    await connection.query('DELETE FROM likes WHERE comment_id IN (SELECT comment_id FROM comments WHERE post_id IN (SELECT post_id FROM posts WHERE user_id = ?))', [id]);
+
+    // Supprimer les commentaires associés aux posts de cet utilisateur
+    await connection.query('DELETE FROM comments WHERE post_id IN (SELECT post_id FROM posts WHERE user_id = ?)', [id]);
+
+    // Supprimer les posts de cet utilisateur
+    await connection.query('DELETE FROM posts WHERE user_id = ?', [id]);
+
+    // Supprimer les profils associés à cet utilisateur
+    await connection.query('DELETE FROM profiles WHERE user_id = ?', [id]);
+
+    // Supprimer l'utilisateur
+    await connection.query('DELETE FROM users WHERE user_id = ?', [id]);
+
+    res.status(204).end();
+    
+    await connection.end();
+  } catch (error) {
+    console.error('Error:', error.message); 
+    res.status(500).json({ error: 'Internal Server Error' }); 
+  }
+};
+
+
+
 
 
 export const handleUser = async (req, res) => {
   const { username, email, password, role, created_at, action } = req.body;
-  console.log(username, email, password, role, created_at, action);
+
 
   try {
     const connection = await createConnection();
