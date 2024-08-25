@@ -101,6 +101,9 @@ ul {
   text-align: left;
 }
 
+.inputTyping:focus{
+  font-size: 1rem;
+}
 .sendButton {
   background: none;
   border: none;

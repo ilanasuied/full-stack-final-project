@@ -20,6 +20,9 @@
 }
 
 .postContent {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   border: 1px #bcbaba solid;
   padding: 10px;
   border-radius: 8px;

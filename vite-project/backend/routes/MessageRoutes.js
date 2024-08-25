@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/messages/:id', getMessagesById);
 
 //Route pour obtenir tous les messages
-router.get('/messages', getAllMessages)
+router.get('/messages/all/:id', getAllMessages)
 
 // Route pour créer un nouveau message
 router.post('/messages', createMessage);

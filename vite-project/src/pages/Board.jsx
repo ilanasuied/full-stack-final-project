@@ -1,5 +1,6 @@
 import React from 'react';
 import MessagePage from './MessagePage';
+import PostPage from './PostPage';
 import styles from '../css/Board.module.css';
 
 function Board() {
@@ -10,7 +11,7 @@ function Board() {
       </div>
       <div className={styles.content}>
         <h1>Tableau de bord principal</h1>
-        <p>Bienvenue sur votre tableau de bord. Sélectionnez un utilisateur à partir de la liste pour voir les messages.</p>
+        <PostPage />
       </div>
     </div>
   );

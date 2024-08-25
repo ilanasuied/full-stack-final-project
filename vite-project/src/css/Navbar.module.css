@@ -1,0 +1,28 @@
+.container {
+    width: 100%;
+}
+
+.container td {
+    text-align: center;
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    transition: box-shadow 0.3s ease, color 0.3s ease, transform 0.1s ease;
+}
+
+.container td:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); 
+}
+
+.tab.active {
+    box-shadow: none;
+    color: black;
+    cursor: default;
+}
+
+.tab.disabled {
+    color: grey;
+    box-shadow: none;
+    cursor: not-allowed;
+}

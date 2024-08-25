@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faCommentAlt } from '@fortawesome/free-solid-svg-icons';
+import PostContent from './PostContent';
 import styles from '../css/Post.module.css';
 
 const Post = ({ post }) => {
@@ -20,7 +21,7 @@ const Post = ({ post }) => {
       <p className={styles.author}>{post.author}</p>
       <div className={styles.postContent}>
         <h2>{post.title}</h2>
-        <p>{post.content}</p>
+        <PostContent content={post.content} />
       </div>
       
       {showComments && (

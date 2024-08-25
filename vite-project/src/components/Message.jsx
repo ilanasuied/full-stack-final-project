@@ -10,8 +10,7 @@ const Message = () => {
   const [newMessage, setNewMessage] = useState('');
   const { id } = useParams();
   const location = useLocation();
-  const currentUser = 1;
-  const recipientId = location.state;
+  const {recipient_id, currentUserId} = location.state;
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -32,9 +31,9 @@ const Message = () => {
     try {
       const response = await axios.post('http://localhost:3001/api/messages', {
         content: newMessage,
-        sender_id: currentUser,
+        sender_id: currentUserId,
         conversation_id: id,
-        recipient_id: recipientId
+        recipient_id: recipient_id
       });
 
       setAllMessages([...allMessages, response.data]);
@@ -58,7 +57,7 @@ const Message = () => {
           {allMessages.map(message => (
             <li
               key={message.message_id}
-              className={message.sender_id !== currentUser ? styles.sentMessage : styles.receivedMessage}
+              className={message.sender_id == currentUserId ? styles.sentMessage : styles.receivedMessage}
             >
               <p>{message.content}</p>
               <p className={styles.date}>{new Date(message.created_at).toLocaleString()}</p>
