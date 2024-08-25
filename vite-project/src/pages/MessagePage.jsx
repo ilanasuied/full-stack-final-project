@@ -38,7 +38,12 @@ function MessagePage() {
   };
 
   const handleStartConversation = async (username) => {
-    console.log('Démarrer une conversation avec:', username);
+    try {
+      const response = await axios.get(`http://localhost:3001/api/users/username/${username}`);
+      if(response.data) {console.log(response.data);}
+    } catch (error) {
+      console.error('Error fetching messages:', error);
+    }
   };
 
   return (

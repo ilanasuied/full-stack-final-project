@@ -43,6 +43,28 @@ export const getUserById = async (req, res) => {
 };
 
 
+export const getUserByUsername = async (req, res) => {
+  try {
+    const connection = await createConnection();
+    const username = req.params.username;
+    const [users] = await connection.query('SELECT username FROM Users WHERE username = ?', [username]);
+    const user = users[0];
+
+    await connection.end();
+
+
+    res.status(200).json(user);
+    
+    
+
+    
+  } catch (error) {
+    console.error('Error:', error.message);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+
 export const updateUser = () => { 
 
 
