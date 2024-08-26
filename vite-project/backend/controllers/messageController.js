@@ -12,12 +12,12 @@ export const getAllMessages = async (req, res) => {
       WHERE (Messages.sender_id = ${currentUserId} OR Messages.recipient_id = ${currentUserId})
       AND Users.user_id != ${currentUserId};
       `)
-    
+
     await connection.end();
     res.json(startedConversation);
   }
   catch (error) {
-  res.status(500).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -42,17 +42,59 @@ export const getMessagesById = async (req, res) => {
 };
 
 
+//get the conversaton id 
+export const getConversationId = async (req, res) => {
+  const currentUserId = req.params.id;
+  const recipientId = req.params.recipientId;
+
+  try {
+    const connection = await createConnection();
+    const [conversationId] = await connection.query(`
+      SELECT distinct conversation_id 
+      FROM messages 
+      WHERE sender_id = ${currentUserId} AND recipient_id = ${recipientId} OR sender_id = ${recipientId} AND recipient_id = ${currentUserId};
+    `);
+
+    await connection.end();
+
+    res.json(conversationId);
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+
+};
+
+
+//create a new conversation
+export const createConversation = async (req, res) => {
+  try {
+    const connection = await createConnection();
+    const [result] = await connection.query(`
+        INSERT INTO conversations (created_at)
+        VALUES
+        (DEFAULT);
+      `);
+
+    await connection.end();
+    res.status(201).json({conversation_id: result.insertId});
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+
 export const createMessage = async (req, res) => {
   const { content, sender_id, conversation_id, recipient_id } = req.body;
   try {
     const connection = await createConnection();
     const [result] = await connection.query(`
-      INSERT INTO Messages (conversation_id, sender_id, recipient_id, content)
-      VALUES (${conversation_id}, ${sender_id}, ${recipient_id}, '${content}');
+        INSERT INTO Messages (conversation_id, sender_id, recipient_id, content)
+        VALUES (${conversation_id}, ${sender_id}, ${recipient_id}, '${content}');
       `);
 
     await connection.end();
-    
+
     res.status(201).json({ message_id: result.insertId, content, sender_id, conversation_id, created_at: new Date() });
   } catch (error) {
     res.status(500).json({ error: error.message });

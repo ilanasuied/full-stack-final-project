@@ -14,6 +14,8 @@ const NewConversationModal = ({ isOpen, onRequestClose, onStartConversation }) =
 
     try {
       const response = await axios.get(`http://localhost:3001/api/users/username/${username}`);
+      
+      //check if this username exist
       if (!response.data) {
 
         // Trigger reflow to restart the animation
@@ -24,13 +26,28 @@ const NewConversationModal = ({ isOpen, onRequestClose, onStartConversation }) =
           inputField.classList.add(styles.shake);
       }, 100);
 
-      } else {
+      } 
+
+      //check if a conversation has already been started with this user
+      else {
+        onRequestClose();
+
         const recipient_id = response.data.user_id;
         const currentUserId = id;
-        console.log(`the recipientId is ${recipient_id} and the currentUser is ${id}`);
 
-        // navigate(`/messages/${conversation_id}`, { state: {recipient_id, currentUserId} });
-        onRequestClose();
+        const responseConversationId = await axios.get(`http://localhost:3001/api/message/conversation/${currentUserId}/${recipient_id}`);
+        const conversationId = responseConversationId.data[0];
+        
+        //if a conversation has already been started, just go to the coversation
+        if(conversationId){
+          navigate(`/messages/${conversationId.conversation_id}`, { state: {recipient_id, currentUserId} });
+        }
+        
+        //else, create a new conversation
+        else{
+          const responseCreateConversation = await axios.post('http://localhost:3001/api/conversation')
+          navigate(`/messages/${responseCreateConversation.data.conversation_id}`, { state: {recipient_id, currentUserId} });
+        }
       }
     } catch (error) {
       console.error('Error fetching messages:', error);
