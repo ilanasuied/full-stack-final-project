@@ -47,7 +47,7 @@ export const getUserByUsername = async (req, res) => {
   try {
     const connection = await createConnection();
     const username = req.params.username;
-    const [users] = await connection.query('SELECT username FROM Users WHERE username = ?', [username]);
+    const [users] = await connection.query('SELECT username, user_id FROM Users WHERE username = ?', [username]);
     const user = users[0];
 
     await connection.end();

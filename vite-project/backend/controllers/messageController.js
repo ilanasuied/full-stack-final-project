@@ -3,7 +3,6 @@ import { createConnection } from '../db.js';
 //get all the users that have started a conversation with the current user
 export const getAllMessages = async (req, res) => {
   const currentUserId = req.params.id;
-  console.log(currentUserId);
   try {
     const connection = await createConnection();
     const [startedConversation] = await connection.query(`
