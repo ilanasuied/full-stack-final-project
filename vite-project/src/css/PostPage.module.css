@@ -1,7 +1,58 @@
-.container{
+.container {
     display: flex;
     flex-wrap: wrap;
     gap: 1.5rem;
     justify-content: center;
     align-items: center;
 }
+
+
+.addPostContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    background-color: transparent;
+}
+
+
+.addPostIcon {
+    font-size: 2rem;
+    color: #7b7b7b;
+}
+
+.addPostIcon:hover{
+    color: black;
+}
+
+.createPostForm {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    /* background-color: #8d8c8c; */
+  }
+  
+  .newPostInput {
+    width: 80%;
+    padding: 8px;
+    font-size: 16px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .createPostButton {
+    padding: 8px 16px;
+    font-size: 16px;
+    background-color: #6087b0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .createPostButton:hover {
+    background-color: #0056b3;
+  }
+  

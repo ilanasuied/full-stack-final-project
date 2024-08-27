@@ -9,7 +9,7 @@ export const getAllPosts = async (req, res) => {
       JOIN Users ON Posts.user_id = Users.user_id
     `);
 
-   
+
     const postPromises = posts.map(async (post) => {
       const [comments] = await connection.query(`
         SELECT Comments.content, Users.username AS commenter
@@ -36,11 +36,11 @@ export const getAllPosts = async (req, res) => {
     await connection.end();
     res.json(detailedPosts);
   } catch (error) {
-    res.status(500).json({ error: error.message }); 
+    res.status(500).json({ error: error.message });
   }
 };
 
-export const getPostById=async(req, res)=>{
+export const getPostById = async (req, res) => {
   try {
     const user_id = req.params.id;
     const connection = await createConnection();
@@ -50,7 +50,7 @@ export const getPostById=async(req, res)=>{
       JOIN Users ON Posts.user_id = Users.user_id
       WHERE Posts.user_id = ?
     `, [user_id]);
-    
+
     const postPromises = posts.map(async (post) => {
       const [comments] = await connection.query(`
         SELECT Comments.content, Users.username AS commenter
@@ -76,15 +76,54 @@ export const getPostById=async(req, res)=>{
     const detailedPosts = await Promise.all(postPromises);
 
     await connection.end();
-    
+
     res.json(detailedPosts);
 
   } catch (error) {
-    res.status(500).json({ error: error.message }); 
+    res.status(500).json({ error: error.message });
   }
 };
-export const createPost=()=>{};
-export const updatePost=()=>{};
-export const deletePost=()=>{};
+
+
+//create a new post
+export const createPost = async (req, res) => {
+  const { user_id, title, content } = req.body;
+  console.log(user_id, title, content)
+  try {
+    const connection = await createConnection();
+
+    // insert the new post
+    const [result] = await connection.query(`
+      INSERT INTO posts (user_id, title, content)
+      VALUES (${user_id}, '${title}', '${content}');
+    `);
+
+    const newPostId = result.insertId;
+
+    // Retrieve the details of the newly created post
+    const [post] = await connection.query(`
+      SELECT Posts.post_id, Posts.title, Posts.content, Users.username AS author
+      FROM Posts
+      JOIN Users ON Posts.user_id = Users.user_id
+      WHERE Posts.post_id = ${newPostId};
+    `);
+
+    // Initialize comments and likes to video tables
+    const detailedPost = {
+      ...post[0],
+      comments: [],
+      likes: []
+    };
+
+    await connection.end();
+
+    res.status(201).json(detailedPost);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+export const updatePost = () => { };
+export const deletePost = () => { };
 
 
