@@ -1,0 +1,25 @@
+/* PostContent.module.css */
+
+.contentContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Style pour centrer et ajuster l'image */
+.contentImage {
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto; /* Centre l'image */
+}
+
+/* Style pour centrer le texte */
+.contentText {
+    font-size: 1.5rem;
+    color: #333;
+    max-width: 100%;
+    margin: 0;
+}

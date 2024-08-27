@@ -46,7 +46,7 @@ function MessagePage() {
       <div className={styles.messageIconContainer}>
         <FontAwesomeIcon icon={faComments} className={styles.messageIcon} />
       </div>
-      <ul>
+      <ul className={styles.ulMessagePage}>
         {messages.map((message, index) => (
           <li key={index} onClick={() => userHandle(message.conversation_id, message.user_id, id)} className={styles.liCont}>
             {message.username}

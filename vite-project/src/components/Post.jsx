@@ -53,7 +53,7 @@ const Post = ({ post, alreadyLiked }) => {
         <ul className={styles.comments}>
           {post.comments.map((comment, index) => (
             <li key={index} className={styles.comment}>
-              <b>{comment.commenter}</b>: {comment.content}
+              <b>{comment.commenter}:</b> {comment.content}
             </li>
           ))}
         </ul>
