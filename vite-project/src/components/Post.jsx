@@ -1,19 +1,44 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faCommentAlt } from '@fortawesome/free-solid-svg-icons';
 import PostContent from './PostContent';
 import styles from '../css/Post.module.css';
 
-const Post = ({ post }) => {
+const Post = ({ post, alreadyLiked }) => {
+  const { id } = useParams();
   const [showComments, setShowComments] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
+  const [isLiked, setIsLiked] = useState(alreadyLiked);
+  const [likeCount, setLikeCount] = useState(post.likes.length);
 
   const toggleComments = () => {
     setShowComments(!showComments);
   };
 
-  const handleLike = () => {
-    setIsLiked(!isLiked);
+  const handleLike = async() => {
+    try {
+      if (isLiked) {
+        setLikeCount(likeCount - 1);
+        //delete the like from the db
+        const response = await axios.delete(`http://localhost:3001/api/like/${id}/${post.post_id}`);
+  
+      } else {
+        setLikeCount(likeCount + 1);
+        //add the like to the db
+        const response = await axios.post('http://localhost:3001/api/like',
+          {
+            user_id: id,
+            post_id: post.post_id,
+            comment_id: 'NULL'
+          }
+        );
+      }
+      setIsLiked(!isLiked);
+    } catch (error) {
+      console.error(error);
+    }
+    
   };
 
   return (
@@ -28,13 +53,13 @@ const Post = ({ post }) => {
         <ul className={styles.comments}>
           {post.comments.map((comment, index) => (
             <li key={index} className={styles.comment}>
-              <b>{comment.commenter}</b>: {comment.content} 
+              <b>{comment.commenter}</b>: {comment.content}
             </li>
           ))}
         </ul>
       )}
       <div className={styles.likes}>
-        ❤️ {post.likes.length}
+        ❤️ {likeCount}
       </div>
       <div className={styles.actions}>
         <FontAwesomeIcon 

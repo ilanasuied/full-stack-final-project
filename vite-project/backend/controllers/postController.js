@@ -19,7 +19,7 @@ export const getAllPosts = async (req, res) => {
       `, [post.post_id]);
 
       const [likes] = await connection.query(`
-        SELECT Users.username AS liker
+        SELECT Users.user_id AS liker
         FROM Likes
         JOIN Users ON Likes.user_id = Users.user_id
         WHERE Likes.post_id = ?
@@ -60,7 +60,7 @@ export const getPostById=async(req, res)=>{
       `, [post.post_id]);
 
       const [likes] = await connection.query(`
-        SELECT Users.username AS liker
+        SELECT Users.user_id AS liker
         FROM Likes
         JOIN Users ON Likes.user_id = Users.user_id
         WHERE Likes.post_id = ?

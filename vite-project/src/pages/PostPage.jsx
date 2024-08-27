@@ -38,7 +38,6 @@ function PostsPage() {
   //this function change the flag allPosts everytime the user change the tab
   const onAllPosts = () =>{
     setAllPostsFlag(!allPostsFlag);
-    console.log(allPostsFlag);
   };
 
 
@@ -48,11 +47,11 @@ function PostsPage() {
       <div className={styles.container}>
         {allPostsFlag ? 
         allPosts.map(post => (
-          <Post key={post.post_id} post={post} /> 
+          <Post key={post.post_id} post={post} alreadyLiked={post.likes.length == 0 ? false : post.likes.includes(parseInt(id, 10))}/> 
         ))
         : 
         userPosts.map(post => (
-          <Post key={post.post_id} post={post} /> 
+          <Post key={post.post_id} post={post} alreadyLiked={post.likes.length == 0 ? false : post.likes.includes(parseInt(id, 10))}/> 
         ))}
         
       </div>
