@@ -10,13 +10,15 @@ import User from "./components/User.jsx";
 import Profile from "./components/Profile.jsx";
 import Quizz from "./components/Quizz.jsx";
 import Contact from "./components/Contact.jsx";
-
+import ScorePage from "./components/ScorePage.jsx";
+import HomePage from "./pages/Home.jsx";
 
 export default function Router() {
    return (
      <BrowserRouter>
      
        <Routes>
+       <Route path="/" element={<HomePage/>} />
          <Route path="/login" element={<Login/>} />
          <Route path="/users" element ={<UserPage/>}/>
          <Route path="/users/:id" element ={<User />}/>
@@ -28,6 +30,7 @@ export default function Router() {
          <Route path="/profile/:id" element={<Profile/>} />
          <Route path="/quiz/:id" element={<Quizz/>} />
          <Route path="/contact/:id" element={<Contact/>} />
+         <Route path="/score" element={<ScorePage/>} />
        </Routes>
      </BrowserRouter>
    );
