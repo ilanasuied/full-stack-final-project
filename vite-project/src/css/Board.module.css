@@ -1,15 +1,32 @@
 .container {
   display: flex;
   height: 100vh;
-  width: 100%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  padding-top: 3rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  background: linear-gradient(135deg, #2F3031, #1e2022);
+  
 }
+
+
 
 .sidebar {
   width: 300px; 
   padding: 20px;
   overflow-y: auto;
-  box-shadow: 8px 0 8px -8px rgba(0, 0, 0, 0.5);
+  box-shadow: 8px 0 8px 16px rgba(0, 0, 0, 0.4);
+  margin: 20px 20px 20px 100px;
+  border-radius: 12px;
+  background-color:#DDD0C8;
+  border: 1px solid #BFA7A0; 
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+
+}
+
+.sidebar:hover {
+  transform: translateX(10px); /* Déplacement au survol */
+  box-shadow: 12px 0 20px rgba(0, 0, 0, 0.5);
 }
 
 .content {
@@ -18,6 +35,19 @@
   overflow-y: auto; /* Activer le défilement vertical */
   scrollbar-width: none; /* Pour Firefox */
   -ms-overflow-style: none;  /* Pour Internet Explorer et Edge */
+  margin: 20px 50px 20px 100px;
+  border-radius: 12px;
+  border: 1px solid #BFA7A0; 
+  background-color:#DDD0C8;
+  max-width: 950px;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.content:hover {
+  background: #F1E9E3; /* Couleur plus claire au survol */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
 }
 
 /* Pour les navigateurs basés sur WebKit */
@@ -28,6 +58,9 @@
 
 .content h1 {
   margin-bottom: 20px;
+  font-size: 2rem; 
+  color: #333;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .content > * {

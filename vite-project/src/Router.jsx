@@ -7,10 +7,15 @@ import Board from "./pages/Board.jsx"
 import SignUp from './pages/SignUp.jsx';
 import UserPage from "./pages/UserPage.jsx";
 import User from "./components/User.jsx";
+import Profile from "./components/Profile.jsx";
+import Quizz from "./components/Quizz.jsx";
+import Contact from "./components/Contact.jsx";
+
 
 export default function Router() {
    return (
      <BrowserRouter>
+     
        <Routes>
          <Route path="/login" element={<Login/>} />
          <Route path="/users" element ={<UserPage/>}/>
@@ -20,7 +25,11 @@ export default function Router() {
          <Route path="/posts" element={<PostPage />} />
          <Route path="/messages" element={<MessagePage />} />
          <Route path="/messages/:id" element={<Message/>} />
+         <Route path="/profile/:id" element={<Profile/>} />
+         <Route path="/quiz/:id" element={<Quizz/>} />
+         <Route path="/contact/:id" element={<Contact/>} />
        </Routes>
      </BrowserRouter>
    );
 }
+

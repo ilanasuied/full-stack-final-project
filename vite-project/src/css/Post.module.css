@@ -5,6 +5,9 @@
   margin-bottom: 20px;
   padding: 15px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%; 
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .post:hover {
@@ -43,4 +46,10 @@
 
 .liked {
   color: #3498db;
+}
+
+@media (max-width: 768px) {
+  .post {
+    max-width: 90%; /* Ajuste la largeur maximale sur les petits écrans */
+  }
 }

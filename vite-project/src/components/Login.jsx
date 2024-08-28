@@ -8,6 +8,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
     const [user, setUser] = useState(null);
+    const [userRole, setUserRole] = useState(null);
     const navigate = useNavigate();
 
 
@@ -29,11 +30,13 @@ const Login = () => {
 
             if (response.status === 200) {
                 setMessage('Successful connection!');
-                console.log('Successful connection!');
+                const userData = response.data.user;
+                setUser(userData);
 
-                setUser(response.data.user);
-                const userId = response.data.user.id;
-                navigate(`/board/${userId}`);
+                localStorage.setItem('user', JSON.stringify(userData));
+
+        
+                navigate(`/board/${userData.id}`);
 
                 setUsername(""); 
                 setPassword(""); 
@@ -69,6 +72,7 @@ const Login = () => {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     required
+                    autoComplete="username"
                 />
                 <input
                     className={logInStyles.inputLogin}
@@ -77,6 +81,7 @@ const Login = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                    autoComplete="current-password"
                 />
                 <button type="submit" className={logInStyles.loginBnt}>Login</button>
             </form>
