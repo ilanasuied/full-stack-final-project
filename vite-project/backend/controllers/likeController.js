@@ -2,7 +2,7 @@ import { createConnection } from '../db.js';
 
 export const createLike = async (req, res) => {
     const { user_id, post_id, comment_id } = req.body;
-    console.log(`${user_id}, ${post_id} , ${comment_id}`);
+
     try {
       const connection = await createConnection();
       const [result] = await connection.query(`
@@ -23,7 +23,6 @@ export const deleteLike = async (req, res) => {
     const user_id = req.params.user_id;
     const post_id = req.params.post_id;
     
-    console.log(`${user_id}, ${post_id}`);
     try {
       const connection = await createConnection();
   

@@ -108,7 +108,7 @@ export const createPost = async (req, res) => {
       WHERE Posts.post_id = ${newPostId};
     `);
 
-    // Initialize comments and likes to video tables
+    // Initialize comments and likes to empty tables
     const detailedPost = {
       ...post[0],
       comments: [],

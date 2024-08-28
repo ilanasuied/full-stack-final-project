@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faXmark} from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
 import Post from '../components/Post';
 import Navbar from '../components/Navbar';
 import styles from '../css/PostPage.module.css';
@@ -47,8 +47,8 @@ function PostsPage() {
 
   const handleCreatePost = async () => {
     try {
-      if (newPostContent.trim() === '') {
-        alert('Le contenu du post ne peut pas être vide.');
+      if (newPostContent.trim() === '' || newPostTitle.trim() === '') {
+        alert("The title and the content cannot be empty");
         return;
       }
 
@@ -59,15 +59,14 @@ function PostsPage() {
       });
 
 
-      if (allPostsFlag) {
-        setAllPosts([response.data, ...allPosts]);
-      } else {
-        setUserPosts([response.data, ...userPosts]);
-      }
+
+      setAllPosts([response.data, ...allPosts]);
+      setUserPosts([response.data, ...userPosts]);
+
 
       setNewPostContent('');
     } catch (error) {
-      console.error('Erreur lors de la création du post :', error);
+      console.error('Error creating post :', error);
     }
   };
 
@@ -84,7 +83,7 @@ function PostsPage() {
 
       <div className={styles.addPostContainer}>
         <FontAwesomeIcon
-          icon={showCreatePost? faXmark : faPlus}
+          icon={showCreatePost ? faXmark : faPlus}
           className={styles.addPostIcon}
           onClick={handleShowCreatePost}
         />
@@ -107,7 +106,7 @@ function PostsPage() {
             className={styles.newPostInput}
           />
           <button onClick={handleCreatePost} className={styles.createPostButton}>
-            Poster
+            Post
           </button>
         </div>
       )}

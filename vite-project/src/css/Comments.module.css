@@ -1,0 +1,44 @@
+.comments {
+    list-style: none; /* Supprime les puces de liste */
+    padding: 0;
+    margin: 20px 0 0 0; /* Espace en haut, supprime le décalage gauche */
+  }
+  
+  /* Style pour chaque commentaire */
+  .comment {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    text-align: left; /* Aligne le texte à gauche */
+  }
+  
+  /* Ajout de style pour l'auteur du commentaire */
+  .comment b {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+  }
+
+  .newCommentInput {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.createCommentButton {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.createCommentButton:hover {
+    background-color: #2980b9;
+}

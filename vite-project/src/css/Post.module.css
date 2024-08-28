@@ -41,32 +41,6 @@
   transition: color 0.3s ease;
 }
 
-/* Post.module.css */
-
-/* Style pour la liste des commentaires */
-.comments {
-  list-style: none; /* Supprime les puces de liste */
-  padding: 0;
-  margin: 20px 0 0 0; /* Espace en haut, supprime le décalage gauche */
-}
-
-/* Style pour chaque commentaire */
-.comment {
-  padding: 10px;
-  margin-bottom: 10px;
-  background-color: #f9f9f9;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-  text-align: left; /* Aligne le texte à gauche */
-}
-
-/* Ajout de style pour l'auteur du commentaire */
-.comment b {
-  display: block;
-  margin-bottom: 5px;
-  color: #333;
-}
-
 .liked {
   color: #3498db;
 }
