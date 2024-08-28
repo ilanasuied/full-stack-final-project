@@ -65,6 +65,8 @@ function PostsPage() {
 
 
       setNewPostContent('');
+      setNewPostTitle('');
+      handleShowCreatePost();
     } catch (error) {
       console.error('Error creating post :', error);
     }
