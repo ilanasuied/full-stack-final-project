@@ -1,44 +1,71 @@
-.comments {
-    list-style: none; /* Supprime les puces de liste */
-    padding: 0;
-    margin: 20px 0 0 0; /* Espace en haut, supprime le décalage gauche */
-  }
-  
-  /* Style pour chaque commentaire */
-  .comment {
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #f9f9f9;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    text-align: left; /* Aligne le texte à gauche */
-  }
-  
-  /* Ajout de style pour l'auteur du commentaire */
-  .comment b {
-    display: block;
-    margin-bottom: 5px;
-    color: #333;
-  }
+/* Comments.module.css */
 
-  .newCommentInput {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+.commentsContainer {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.comments {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.comment {
+  display: flex;
+  justify-content: space-between; /* Espace entre le texte et l'icône */
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.comment:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre plus prononcée au survol */
+}
+
+.commentText {
+  font-size: 1rem;
+  color: #333;
+  flex-grow: 1;
+  margin-right: 15px; /* Espace entre le texte et l'icône */
+}
+
+.deleteIcon {
+  color: #ccc;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.deleteIcon:hover {
+  color: #e74c3c; /* Devient rouge au survol */
+}
+
+.newCommentInput {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
 .createCommentButton {
-    background-color: #3498db;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  background-color: #3498db;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .createCommentButton:hover {
-    background-color: #2980b9;
+  background-color: #2980b9;
 }

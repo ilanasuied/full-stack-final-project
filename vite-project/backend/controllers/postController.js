@@ -12,7 +12,7 @@ export const getAllPosts = async (req, res) => {
 
     const postPromises = posts.map(async (post) => {
       const [comments] = await connection.query(`
-        SELECT Comments.content, Users.username AS commenter
+        SELECT Comments.content, Comments.comment_id, Comments.user_id, Users.username AS commenter
         FROM Comments
         JOIN Users ON Comments.user_id = Users.user_id
         WHERE Comments.post_id = ?
@@ -53,7 +53,7 @@ export const getPostById = async (req, res) => {
 
     const postPromises = posts.map(async (post) => {
       const [comments] = await connection.query(`
-        SELECT Comments.content, Users.username AS commenter
+        SELECT Comments.content, Comments.comment_id, Comments.user_id, Users.username AS commenter
         FROM Comments
         JOIN Users ON Comments.user_id = Users.user_id
         WHERE Comments.post_id = ?

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faThumbsUp, faCommentAlt } from '@fortawesome/free-solid-svg-icons';
+import { faThumbsUp, faComment, faTrash } from '@fortawesome/free-solid-svg-icons';
 import PostContent from './PostContent';
 import Comments from './Comments';  // Import du nouveau composant
 import styles from '../css/Post.module.css';
@@ -40,6 +40,7 @@ const Post = ({ post, alreadyLiked }) => {
   };
 
 
+  //function to create a new comment
   const createComment = async(newComment) => {
     try {
       if (newComment.trim() === '') {
@@ -60,6 +61,18 @@ const Post = ({ post, alreadyLiked }) => {
   };
 
 
+  // function to delete a comment
+  const  deleteComment  = async(commentToDelete) => {
+    try {
+      
+      await axios.delete(`http://localhost:3001/api/comment/${commentToDelete}`);
+      setComments(comments.filter(comment => comment.comment_id !== commentToDelete));
+      return (comments.filter(comment => comment.comment_id !== commentToDelete));
+    } catch (error) {
+      console.error('Error creating comment:', error);
+    }
+  };
+
   return (
     <div className={styles.post}>
       <p className={styles.author}>{post.author}</p>
@@ -77,9 +90,11 @@ const Post = ({ post, alreadyLiked }) => {
           className={`${styles.icon} ${isLiked ? styles.liked : ''}`}
           onClick={handleLike}
         />
-        <FontAwesomeIcon icon={faCommentAlt} className={styles.icon} onClick={toggleComments} />
+        <FontAwesomeIcon icon={faComment} className={styles.icon} onClick={toggleComments} />
+        <FontAwesomeIcon icon={faTrash}/>
+
       </div>
-      {showComments && <Comments initialComments={comments} createComment={createComment}/>}
+      {showComments && <Comments initialComments={comments} createComment={createComment} deleteComment={deleteComment} currentUserId={id}/>}
     </div>
   );
 }
