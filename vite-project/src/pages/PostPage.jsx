@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { json, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faXmark, faRefresh } from '@fortawesome/free-solid-svg-icons';
 import Post from '../components/Post';
 import Navbar from '../components/Navbar';
 import styles from '../css/PostPage.module.css';
@@ -15,15 +15,23 @@ function PostsPage() {
   const [newPostContent, setNewPostContent] = useState('');
   const [newPostTitle, setNewPostTitle] = useState('');
   const [showCreatePost, setShowCreatePost] = useState(false);
+  const [allowed_fetching, setAllowed_fetching] = useState(false);
+  const [page, setPage] = useState(localStorage.getItem('currentPage')=== null ? 1: JSON.parse(localStorage.getItem('currentPage')));
+  const limit = 3;
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
         if (allPostsFlag) {
-          if (localStorage.getItem('allPostsData') === null) {
-            const response = await axios.get('http://localhost:3001/api/posts');
-            setAllPosts(response.data);
-            localStorage.setItem('allPostsData', JSON.stringify(response.data));
+          if (allowed_fetching || (localStorage.getItem('allPostsData') === null)) {
+            const response = await axios.get('http://localhost:3001/api/posts', {
+              params: {
+                page,
+                limit
+              }
+            });
+            setAllPosts(prevPosts => [...prevPosts, ...response.data]);
+            localStorage.setItem('allPostsData', JSON.stringify([...allPosts, ...response.data]));
           } else {
             setAllPosts(JSON.parse(localStorage.getItem('allPostsData')));
           }
@@ -43,12 +51,19 @@ function PostsPage() {
     };
 
     fetchPosts();
-  }, [allPostsFlag]);
+  }, [allPostsFlag, page]);
 
 
   //this function change the flag allPosts everytime the user change the tab
   const onAllPosts = () => {
     setAllPostsFlag(!allPostsFlag);
+  };
+
+
+  const incrementPage = () => {
+    setPage(prevPage => prevPage + 1);
+    localStorage.setItem('currentPage', JSON.stringify(page + 1));
+    setAllowed_fetching(prevAllowed => true);
   };
 
 
@@ -164,6 +179,7 @@ function PostsPage() {
           userPosts.map(post => (
             <Post key={post.post_id} post={post} alreadyLiked={post.likes.length === 0 ? false : post.likes.includes(parseInt(id, 10))} deletePost={deletePost} DELETE_AUTHORIZATION={post.author === currentUserUsername || ADMIN_ACCESS} />
           ))}
+        {allPostsFlag && <FontAwesomeIcon icon={faRefresh} onClick={incrementPage} />}
       </div>
     </div>
   );

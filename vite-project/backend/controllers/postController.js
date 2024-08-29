@@ -2,12 +2,17 @@ import { createConnection } from '../db.js';
 
 export const getAllPosts = async (req, res) => {
   try {
+    const { page = 1, limit = 10 } = req.query;
+    const offset = (page - 1) * limit;
+
     const connection = await createConnection();
     const [posts] = await connection.query(`
       SELECT Posts.post_id, Posts.title, Posts.content, Users.username AS author
       FROM Posts
       JOIN Users ON Posts.user_id = Users.user_id
-    `);
+      LIMIT ? OFFSET ?
+    `, [parseInt(limit), parseInt(offset)]);
+
 
 
     const postPromises = posts.map(async (post) => {
@@ -87,9 +92,9 @@ export const getPostById = async (req, res) => {
 
 //create a new post
 export const createPost = async (req, res) => {
-  const { user_id, title, content } = req.body;
-
   try {
+    const { user_id, title, content } = req.body;
+
     const connection = await createConnection();
 
     // insert the new post
@@ -127,9 +132,9 @@ export const updatePost = async() => { };
 
 //fonction to delete a post
 export const deletePost = async(req, res) => { 
-  const post_id = req.params.id;
-
   try {
+    const post_id = req.params.id;
+
     const connection = await createConnection();
 
     await connection.query(`
