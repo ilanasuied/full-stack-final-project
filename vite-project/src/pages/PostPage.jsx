@@ -6,6 +6,7 @@ import { faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
 import Post from '../components/Post';
 import Navbar from '../components/Navbar';
 import styles from '../css/PostPage.module.css';
+
 function PostsPage() {
   const { id } = useParams();
   const [userPosts, setUserPosts] = useState([]);
@@ -23,7 +24,7 @@ function PostsPage() {
             const response = await axios.get('http://localhost:3001/api/posts');
             setAllPosts(response.data);
             localStorage.setItem('allPostsData', JSON.stringify(response.data));
-          }else{
+          } else {
             setAllPosts(JSON.parse(localStorage.getItem('allPostsData')));
           }
         }
@@ -32,7 +33,7 @@ function PostsPage() {
             const response = await axios.get(`http://localhost:3001/api/posts/${id}`);
             setUserPosts(response.data);
             localStorage.setItem('userPostsData', JSON.stringify(response.data));
-          }else{
+          } else {
             setUserPosts(JSON.parse(localStorage.getItem('userPostsData')));
           }
         }
@@ -51,6 +52,7 @@ function PostsPage() {
   };
 
 
+  //function to create a new post
   const handleCreatePost = async () => {
     try {
       if (newPostContent.trim() === '' || newPostTitle.trim() === '') {
@@ -67,12 +69,16 @@ function PostsPage() {
 
 
       setAllPosts([response.data, ...allPosts]);
-      localStorage.setItem('allPostsData', JSON.stringify([response.data, ...allPosts]))
-      
       setUserPosts([response.data, ...userPosts]);
-      localStorage.setItem('userPostsData', JSON.stringify([response.data, ...userPosts]))
 
 
+      //update the data in the localSorage
+      if (localStorage.getItem('userPostsData') != null) {
+        localStorage.setItem('userPostsData', JSON.stringify([response.data, ...userPosts]))
+      }
+      if (localStorage.getItem('allPostsData') != null) {
+        localStorage.setItem('allPostsData', JSON.stringify([response.data, ...allPosts]))
+      }
       setNewPostContent('');
       setNewPostTitle('');
       handleShowCreatePost();
@@ -87,6 +93,33 @@ function PostsPage() {
   };
 
 
+  // function to delete a post
+  const deletePost = async (postIdToDel) => {
+    try {
+      console.log(postIdToDel);
+      await axios.delete(`http://localhost:3001/api/posts/${postIdToDel}`);
+
+      setUserPosts(userPosts.filter(post => post.post_id !== postIdToDel));
+      setAllPosts(allPosts.filter(post => post.post_id !== postIdToDel));
+
+
+      //update the data in the localStorage 
+      if (localStorage.getItem('userPostsData') != null) {
+        localStorage.setItem('userPostsData', JSON.stringify(userPosts.filter(post => post.post_id !== postIdToDel)));
+      }
+      if (localStorage.getItem('allPostsData') != null) {
+        localStorage.setItem('allPostsData', JSON.stringify(allPosts.filter(post => post.post_id !== postIdToDel)));
+      }
+
+    } catch (error) {
+      console.error('Error deletting post:', error);
+    }
+  };
+
+
+  const userData = JSON.parse(localStorage.getItem('user'));
+  const ADMIN_ACCESS = userData.role === "Admin";
+  const currentUserUsername = userData.username;
 
   return (
     <div>
@@ -125,11 +158,11 @@ function PostsPage() {
       <div className={styles.container}>
         {allPostsFlag ?
           allPosts.map(post => (
-            <Post key={post.post_id} post={post} alreadyLiked={post.likes.length === 0 ? false : post.likes.includes(parseInt(id, 10))} />
+            <Post key={post.post_id} post={post} alreadyLiked={post.likes.length === 0 ? false : post.likes.includes(parseInt(id, 10))} deletePost={deletePost} DELETE_AUTHORIZATION={post.author === currentUserUsername || ADMIN_ACCESS} />
           ))
           :
           userPosts.map(post => (
-            <Post key={post.post_id} post={post} alreadyLiked={post.likes.length === 0 ? false : post.likes.includes(parseInt(id, 10))} />
+            <Post key={post.post_id} post={post} alreadyLiked={post.likes.length === 0 ? false : post.likes.includes(parseInt(id, 10))} deletePost={deletePost} DELETE_AUTHORIZATION={post.author === currentUserUsername || ADMIN_ACCESS} />
           ))}
       </div>
     </div>

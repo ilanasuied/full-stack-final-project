@@ -88,7 +88,7 @@ export const getPostById = async (req, res) => {
 //create a new post
 export const createPost = async (req, res) => {
   const { user_id, title, content } = req.body;
-  console.log(user_id, title, content)
+
   try {
     const connection = await createConnection();
 
@@ -123,7 +123,26 @@ export const createPost = async (req, res) => {
   }
 };
 
-export const updatePost = () => { };
-export const deletePost = () => { };
+export const updatePost = async() => { };
 
+//fonction to delete a post
+export const deletePost = async(req, res) => { 
+  const post_id = req.params.id;
+
+  try {
+    const connection = await createConnection();
+
+    await connection.query(`
+      DELETE FROM posts 
+      WHERE post_id = ${post_id};
+      `);
+
+
+    res.status(204).end();
+    
+    await connection.end();
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' }); 
+  }
+};
 

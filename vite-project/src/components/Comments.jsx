@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinusCircle } from '@fortawesome/free-solid-svg-icons';
 import styles from '../css/Comments.module.css';
 
-const Comments = ({ initialComments, createComment, deleteComment, currentUserId }) => {
+const Comments = ({ initialComments, createComment, deleteComment, currentUserId, DELETE_AUTHORIZATION }) => {
     const [comments, setComments] = useState(initialComments);
     const [newComment, setNewComment] = useState('');
 
@@ -39,7 +39,7 @@ const Comments = ({ initialComments, createComment, deleteComment, currentUserId
                         <div className={styles.commentText}>
                             <b>{comment.commenter}:</b> {comment.content}
                         </div>
-                        {comment.user_id === parseInt(currentUserId,10)&& <FontAwesomeIcon
+                        {(DELETE_AUTHORIZATION || comment.user_id === parseInt(currentUserId,10)) && <FontAwesomeIcon
                             icon={faMinusCircle}
                             className={styles.deleteIcon}
                             onClick={() => handleDeleteComment(comment.comment_id)}

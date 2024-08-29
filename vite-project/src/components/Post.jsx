@@ -7,7 +7,7 @@ import PostContent from './PostContent';
 import Comments from './Comments';  // Import du nouveau composant
 import styles from '../css/Post.module.css';
 
-const Post = ({ post, alreadyLiked }) => {
+const Post = ({ post, alreadyLiked, deletePost, DELETE_AUTHORIZATION}) => {
   const { id } = useParams();
   const [isLiked, setIsLiked] = useState(alreadyLiked);
   const [likeCount, setLikeCount] = useState(post.likes.length);
@@ -15,6 +15,13 @@ const Post = ({ post, alreadyLiked }) => {
   const [comments, setComments] = useState(post.comments);
 
 
+  //function to delete a post from the database
+  const handleDeletePost = async() => {
+    deletePost(post.post_id);
+  };
+
+
+  //add and delete likes from posts
   const handleLike = async () => {
     try {
       if (isLiked) {
@@ -91,10 +98,10 @@ const Post = ({ post, alreadyLiked }) => {
           onClick={handleLike}
         />
         <FontAwesomeIcon icon={faComment} className={styles.icon} onClick={toggleComments} />
-        <FontAwesomeIcon icon={faTrash}/>
+        {DELETE_AUTHORIZATION && <FontAwesomeIcon icon={faTrash} onClick={handleDeletePost}/>}
 
       </div>
-      {showComments && <Comments initialComments={comments} createComment={createComment} deleteComment={deleteComment} currentUserId={id}/>}
+      {showComments && <Comments initialComments={comments} createComment={createComment} deleteComment={deleteComment} currentUserId={id} DELETE_AUTHORIZATION={DELETE_AUTHORIZATION}/>}
     </div>
   );
 }
