@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { json, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
@@ -19,15 +19,21 @@ function PostsPage() {
     const fetchPosts = async () => {
       try {
         if (allPostsFlag) {
-          if (allPosts.length == 0) {
+          if (localStorage.getItem('allPostsData') === null) {
             const response = await axios.get('http://localhost:3001/api/posts');
             setAllPosts(response.data);
+            localStorage.setItem('allPostsData', JSON.stringify(response.data));
+          }else{
+            setAllPosts(JSON.parse(localStorage.getItem('allPostsData')));
           }
         }
         else {
-          if (userPosts.length == 0) {
+          if (localStorage.getItem('userPostsData') === null) {
             const response = await axios.get(`http://localhost:3001/api/posts/${id}`);
             setUserPosts(response.data);
+            localStorage.setItem('userPostsData', JSON.stringify(response.data));
+          }else{
+            setUserPosts(JSON.parse(localStorage.getItem('userPostsData')));
           }
         }
       } catch (error) {
@@ -61,7 +67,10 @@ function PostsPage() {
 
 
       setAllPosts([response.data, ...allPosts]);
+      localStorage.setItem('allPostsData', JSON.stringify([response.data, ...allPosts]))
+      
       setUserPosts([response.data, ...userPosts]);
+      localStorage.setItem('userPostsData', JSON.stringify([response.data, ...userPosts]))
 
 
       setNewPostContent('');

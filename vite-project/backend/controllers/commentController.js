@@ -16,8 +16,8 @@ export const createComment = async (req, res) => {
             SELECT Comments.content, Comments.comment_id, Comments.user_id, Users.username AS commenter
             FROM Comments
             JOIN Users ON Comments.user_id = Users.user_id
-            WHERE Comments.post_id = ?
-          `, [post_id]);
+            WHERE Comments.post_id = ${post_id} AND Comments.comment_id = ${result.insertId};
+          `);
       await connection.end();
   
       res.status(201).json(comments);

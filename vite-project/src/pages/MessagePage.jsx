@@ -10,23 +10,29 @@ function MessagePage() {
   const [messages, setMessages] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const navigate = useNavigate();
-  const {id} = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/api/messages/all/${id}`);
-        setMessages(response.data);
+        if (localStorage.getItem('conversationsList') === null) {
+          const response = await axios.get(`http://localhost:3001/api/messages/all/${id}`);
+          setMessages(response.data);
+          localStorage.setItem('conversationsList', JSON.stringify(response.data));
+        } else {
+          setMessages(JSON.parse(localStorage.getItem('conversationsList')));
+        }
       } catch (error) {
         console.error('Error fetching messages:', error);
       }
+
     };
 
     fetchMessages();
   }, []);
 
   const userHandle = (conversation_id, recipient_id, currentUserId) => {
-    navigate(`/messages/${conversation_id}`, { state: {recipient_id, currentUserId} });
+    navigate(`/messages/${conversation_id}`, { state: { recipient_id, currentUserId } });
   };
 
   const openModal = () => {
@@ -37,9 +43,6 @@ function MessagePage() {
     setModalIsOpen(false);
   };
 
-  const handleStartConversation = async (username) => {
-    
-  };
 
   return (
     <div>
@@ -53,14 +56,13 @@ function MessagePage() {
           </li>
         ))}
       </ul>
-        <div onClick={openModal} className={styles.messageIconContainer}>
-          <FontAwesomeIcon icon={faPlus} className={styles.messageIcon} />
-        </div>
+      <div onClick={openModal} className={styles.messageIconContainer}>
+        <FontAwesomeIcon icon={faPlus} className={styles.messageIcon} />
+      </div>
 
       <NewConversationModal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        onStartConversation={handleStartConversation}
       />
     </div>
   );

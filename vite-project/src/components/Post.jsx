@@ -53,8 +53,8 @@ const Post = ({ post, alreadyLiked }) => {
         content: newComment
       });
 
-      setComments(response.data);
-      return response.data;
+      setComments([...comments, response.data[0]]);
+      return [...comments, response.data[0]];
     } catch (error) {
       console.error('Error creating comment:', error);
     }

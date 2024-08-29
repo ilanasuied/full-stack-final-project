@@ -68,6 +68,7 @@ export const getConversationId = async (req, res) => {
 
 //create a new conversation
 export const createConversation = async (req, res) => {
+  const recipient_id = req.body.recipient_id;
   try {
     const connection = await createConnection();
     const [result] = await connection.query(`
@@ -76,8 +77,14 @@ export const createConversation = async (req, res) => {
         (DEFAULT);
       `);
 
+    const [details] = await connection.query(`
+        SELECT username 
+        FROM users
+        WHERE user_id = ${recipient_id};
+      `);
+
     await connection.end();
-    res.status(201).json({conversation_id: result.insertId});
+    res.status(201).json({conversation_id: result.insertId,  username: details[0].username});
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

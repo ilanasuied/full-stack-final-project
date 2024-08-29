@@ -15,9 +15,14 @@ const Message = () => {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/api/messages/${id}`);
-        setAllMessages(response.data);
-      } catch (error) {
+        if(localStorage.getItem(`conversation_${id}`) === null ){
+          const response = await axios.get(`http://localhost:3001/api/messages/${id}`);
+          setAllMessages(response.data);
+          localStorage.setItem(`conversation_${id}`, JSON.stringify(response.data));  
+        }else{
+          setAllMessages(JSON.parse(localStorage.getItem(`conversation_${id}`)));
+        }
+        } catch (error) {
         console.error('Error fetching messages:', error);
       }
     };
@@ -37,6 +42,9 @@ const Message = () => {
       });
 
       setAllMessages([...allMessages, response.data]);
+      localStorage.setItem(`conversation_${id}`, JSON.stringify([...allMessages, response.data]))
+
+
       setNewMessage('');
     } catch (error) {
       console.error('Error sending message:', error);
@@ -57,7 +65,7 @@ const Message = () => {
           {allMessages.map(message => (
             <li
               key={message.message_id}
-              className={message.sender_id == currentUserId ? styles.sentMessage : styles.receivedMessage}
+              className={message.sender_id != currentUserId ? styles.sentMessage : styles.receivedMessage}
             >
               <p>{message.content}</p>
               <p className={styles.date}>{new Date(message.created_at).toLocaleString()}</p>

@@ -4,7 +4,7 @@ import axios from 'axios';
 import Modal from 'react-modal';
 import styles from '../css/NewConversationModal.module.css';
 
-const NewConversationModal = ({ isOpen, onRequestClose, onStartConversation }) => {
+const NewConversationModal = ({ isOpen, onRequestClose }) => {
   const [username, setUsername] = useState('');
   const navigate = useNavigate();
   const {id} = useParams();
@@ -45,7 +45,12 @@ const NewConversationModal = ({ isOpen, onRequestClose, onStartConversation }) =
         
         //else, create a new conversation
         else{
-          const responseCreateConversation = await axios.post('http://localhost:3001/api/conversation')
+          const responseCreateConversation = await axios.post('http://localhost:3001/api/conversation',{recipient_id});
+          responseCreateConversation.data.user_id = recipient_id;
+
+          const newdata = responseCreateConversation.data;
+          const databefore = JSON.parse(localStorage.getItem('conversationsList'));
+          localStorage.setItem('conversationsList', JSON.stringify([newdata, ...databefore]));
           navigate(`/messages/${responseCreateConversation.data.conversation_id}`, { state: {recipient_id, currentUserId} });
         }
       }
