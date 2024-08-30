@@ -8,7 +8,7 @@ router.get('/scores',getAllScores);
 
 router.get('/scores/:id',getScoreById);
 
-router.post('/scores', handleScores);
+router.post('/scores/:id', handleScores);
 
 router.delete('/scores/:id', deleteScore);
 
