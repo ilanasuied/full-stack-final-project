@@ -172,8 +172,8 @@ function PostsPage() {
 
       <div className={styles.container}>
         {allPostsFlag ?
-          allPosts.map(post => (
-            <Post key={post.post_id} post={post} alreadyLiked={post.likes.length === 0 ? false : post.likes.includes(parseInt(id, 10))} deletePost={deletePost} DELETE_AUTHORIZATION={post.author === currentUserUsername || ADMIN_ACCESS} />
+          allPosts.map((post, index) => (
+            <Post key={index} post={post} alreadyLiked={post.likes.length === 0 ? false : post.likes.includes(parseInt(id, 10))} deletePost={deletePost} DELETE_AUTHORIZATION={post.author === currentUserUsername || ADMIN_ACCESS} />
           ))
           :
           userPosts.map(post => (

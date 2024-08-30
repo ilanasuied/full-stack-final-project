@@ -4,20 +4,38 @@ import bcrypt from 'bcrypt';
 
 export const getAllUsers = async (req, res) => {
   try {
-    const connection = await createConnection();
-    const [users] = await connection.query(`
-        SELECT *
-        FROM Users
-        WHERE Users.role <> 'ADMIN';
-      `);
-    await connection.end();
-    res.status(200).json(users);
+    const { page = 1, limit = 5 } = req.query; // 5 by page by default
+    const offset = (page - 1) * limit;
 
+    const connection = await createConnection();
+    
+    // Get the total users 
+    const [totalResult] = await connection.query(`
+      SELECT COUNT(*) as total FROM Users WHERE Users.role <> 'ADMIN';
+    `);
+    const totalUsers = totalResult[0].total;
+
+    // get the users 
+    const [users] = await connection.query(`
+      SELECT *
+      FROM Users
+      WHERE Users.role <> 'ADMIN'
+      LIMIT ? OFFSET ?;
+    `, [parseInt(limit), parseInt(offset)]);
+    
+    await connection.end();
+
+    // The data to return
+    res.status(200).json({
+      totalUsers,
+      users
+    });
 
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
+
 
 
 export const getUserById = async (req, res) => {
@@ -29,12 +47,7 @@ export const getUserById = async (req, res) => {
     const user = users[0];
 
     await connection.end();
-
-
     res.status(200).json(user);
-
-
-
 
   } catch (error) {
     console.error('Error:', error.message);

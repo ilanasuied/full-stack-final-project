@@ -1,7 +1,8 @@
 /* Conteneur global */
 .container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    flex-wrap: wrap;
+    display: flex;
+    /* grid-template-columns: repeat(3, 1fr); */
     gap: 20px;
     margin: 20px;
 }
@@ -13,6 +14,7 @@
     background-color: #ffffff;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -66,9 +68,9 @@
     align-items: center;
 }
 
-.deleteUserBtn {
-    background-color: #e74c3c;
-    color: white;
+.deleteUserBtn, .backBtn {
+    color: black;
+    font-size: 1.5rem;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -76,8 +78,14 @@
     transition: background-color 0.3s ease;
 }
 
+
+.backBtn:hover{
+    color: #646464;
+}
+
+
 .deleteUserBtn:hover {
-    background-color: #c0392b;
+    color: #ec2b15;
 }
 
 /* Style des messages */
@@ -90,4 +98,17 @@
     font-size: 1.25rem;
     color: #3498db;
     text-align: center;
+}
+
+.refreshBtn{
+    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-size: 1.5rem;
+}
+
+.refreshBtn:hover{
+    color: #646464;
 }

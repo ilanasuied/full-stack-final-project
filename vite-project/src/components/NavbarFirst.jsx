@@ -4,7 +4,9 @@ import navbarStyle from '../css/NavbarFirst.module.css'
 import logo from '../icons/IKReact.ico';
 const NavbarFirst = () => {
     const { id } = useParams();
-
+    const userData = JSON.parse(localStorage.getItem('user'));
+    const ADMIN_ACCESS = userData.role === "Admin";
+    const currentUserUsername = userData.username;
    
   return (
     <nav className={navbarStyle.navbar}>
@@ -19,6 +21,10 @@ const NavbarFirst = () => {
             <li>
                 <NavLink to={`/profile/${id}`} className={navbarStyle.active}>Profile</NavLink>
             </li>
+            {ADMIN_ACCESS &&
+            <li>
+                <NavLink to={`/users`} className={navbarStyle.active}>Users</NavLink>
+            </li>}
             <li>
                 <NavLink to={`/contact/${id}`} className={navbarStyle.active}>Contact</NavLink>
             </li>
