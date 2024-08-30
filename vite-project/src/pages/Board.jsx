@@ -5,6 +5,7 @@ import NavbarFirst from '../components/NavbarFirst';
 import styles from '../css/Board.module.css';
 
 
+
 function Board() {
   return (
     <div>

@@ -30,7 +30,7 @@ export default function Router() {
          <Route path="/profile/:id" element={<Profile/>} />
          <Route path="/quiz/:id" element={<Quizz/>} />
          <Route path="/contact/:id" element={<Contact/>} />
-         <Route path="/score" element={<ScorePage/>} />
+         <Route path="/scores/:id" element={<ScorePage/>} />
        </Routes>
      </BrowserRouter>
    );
