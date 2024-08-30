@@ -57,6 +57,9 @@ function PostsPage() {
   //this function change the flag allPosts everytime the user change the tab
   const onAllPosts = () => {
     setAllPostsFlag(!allPostsFlag);
+    if(allPostsFlag){
+      window.location.reload();
+    }
   };
 
 
