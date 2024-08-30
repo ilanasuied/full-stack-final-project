@@ -1,0 +1,49 @@
+.contactPage {
+    padding: 20px;
+}
+
+.contactContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mapContainer {
+    margin-bottom: 40px;
+}
+
+.videoContainer {
+    margin-bottom: 40px;
+}
+
+.photoGallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+.photos img {
+    width: 100%;
+    max-width: 250px;
+    border-radius: 8px;
+}
+
+.aboutUs {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 40px;
+}
+
+.aboutUs h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.aboutUs p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #333;
+}
