@@ -34,7 +34,7 @@ const SignUp = () => {
                 
 
                 const userId = response.data.user.id;
-                navigate(`/board/${userId}`);
+                navigate(`/login`);
 
                 
                 setUsername("");

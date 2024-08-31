@@ -14,25 +14,26 @@ import ScorePage from "./components/ScorePage.jsx";
 import HomePage from "./pages/Home.jsx";
 
 export default function Router() {
-   return (
-     <BrowserRouter>
-     
-       <Routes>
-       <Route path="/" element={<HomePage/>} />
-         <Route path="/login" element={<Login/>} />
-         <Route path="/users" element ={<UserPage/>}/>
-         <Route path="/users/:id" element ={<User />}/>
-         <Route path = "/signUp" element = {<SignUp/>}/>
-         <Route path="/board/:id" element={<Board />} />
-         <Route path="/posts" element={<PostPage />} />
-         <Route path="/messages" element={<MessagePage />} />
-         <Route path="/messages/:id" element={<Message/>} />
-         <Route path="/profile/:id" element={<Profile/>} />
-         <Route path="/quiz/:id" element={<Quizz/>} />
-         <Route path="/contact/:id" element={<Contact/>} />
-         <Route path="/scores/:id" element={<ScorePage/>} />
-       </Routes>
-     </BrowserRouter>
-   );
+  return (
+    <BrowserRouter>
+
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="*" element={<HomePage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/users" element={<UserPage />} />
+        <Route path="/users/:id" element={<User />} />
+        <Route path="/signUp" element={<SignUp />} />
+        <Route path="/board/:id" element={<Board />} />
+        <Route path="/posts" element={<PostPage />} />
+        <Route path="/messages" element={<MessagePage />} />
+        <Route path="/messages/:id" element={<Message />} />
+        <Route path="/profile/:id" element={<Profile />} />
+        <Route path="/quiz/:id" element={<Quizz />} />
+        <Route path="/contact/:id" element={<Contact />} />
+        <Route path="/scores/:id" element={<ScorePage />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
