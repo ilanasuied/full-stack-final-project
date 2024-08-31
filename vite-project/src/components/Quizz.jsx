@@ -96,7 +96,7 @@ const Quizz = () => {
   }, []);
 
   if (quizFinished) {
-    navigate(`/scores/ofUser/${id}`);
+    navigate(`/scores/${id}`);
   }
 
   return (
