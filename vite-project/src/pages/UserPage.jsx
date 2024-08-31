@@ -3,6 +3,7 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRefresh, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import NavBarFirst from '../components/NavbarFirst';
 import UserPageStyle from '../css/Users.module.css';
 
 
@@ -52,16 +53,9 @@ function UserPage() {
 
 
 
-  const handleGoBack = () => {
-    window.history.back();
-  };
-
-
   return (
     <>
-      <div className={UserPageStyle.backBtn}>
-        <FontAwesomeIcon icon={faArrowLeft} onClick={handleGoBack} />
-      </div>
+      <NavBarFirst />
       <div className={UserPageStyle.container}>
         {users.map((user, index) => (
           <div key={index} className={UserPageStyle.user} onClick={() => handleUserClick(user.user_id, user.username)}>

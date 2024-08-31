@@ -1,11 +1,14 @@
 .contactPage {
-    padding: 20px;
+    padding-top: 10%;
+    height: 100vh;
+
 }
 
 .contactContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 50px;
 }
 
 .mapContainer {
@@ -34,6 +37,7 @@
     padding: 20px;
     border-radius: 10px;
     margin-top: 40px;
+    width: 50%;
 }
 
 .aboutUs h2 {

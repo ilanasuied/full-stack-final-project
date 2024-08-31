@@ -9,26 +9,6 @@ const Contact = () => {
       <div className={styles.contactContainer}>
         <h1>Contact Us</h1>
 
-
-        {/* Video Section
-        <div className={styles.videoContainer}>
-          <h2>Introduction Video</h2>
-          <video width="600" controls>
-            <source src="video.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div> */}
-
-        {/* Photo Gallery
-        <div className={styles.photoGallery}>
-          <h2>Photo Gallery</h2>
-          <div className={styles.photos}>
-            <img src="photo1.jpg" alt="Photo 1" />
-            <img src="photo2.jpg" alt="Photo 2" />
-            <img src="photo3.jpg" alt="Photo 3" />
-          </div>
-        </div> */}
-
         {/* About Us Section */}
         <div className={styles.aboutUs}>
           <h2>About Us</h2>
@@ -45,7 +25,7 @@ const Contact = () => {
             that values innovation, knowledge sharing, and personal growth through technology.
           </p>
         </div>
-        Google Maps Section
+
         <div className={styles.mapContainer}>
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345094!2d144.95373531531703!3d-37.81627977975153!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf5777e84ff3e9a3b!2sVictoria%20State%20Library!5e0!3m2!1sen!2sus!4v1617787868912!5m2!1sen!2sus"
@@ -55,6 +35,19 @@ const Contact = () => {
             loading="lazy"
           ></iframe>
         </div>
+
+        <div className={styles.videoContainer}>
+          <h2>Introduction Video</h2>
+          <iframe 
+            width="600" 
+            height="315" 
+            src="https://www.youtube.com/embed/N3AkSS5hXMA" 
+            title="YouTube video player" 
+            frameBorder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowFullScreen>
+          </iframe>
+        </div> 
       </div>
     </div>
   )

@@ -48,20 +48,20 @@ const User = () => {
 
 
                 //delete his post from the localStorage
-                if(localStorage.getItem('allPostsData')){
+                if (localStorage.getItem('allPostsData')) {
                     const posts = JSON.parse(localStorage.getItem('allPostsData'));
                     const updatedPosts = posts.filter(post => post.author != username);
                     localStorage.setItem('allPostsData', JSON.stringify(updatedPosts));
                 }
-                
+
 
                 //delete his conversation from the list of conversation
-                if(localStorage.getItem('conversationsList')){
+                if (localStorage.getItem('conversationsList')) {
                     const conversations = JSON.parse(localStorage.getItem('conversationsList'));
                     const updatedList = conversations.filter(conversations => conversations.user_id !== parseInt(id));
                     localStorage.setItem('conversationsList', JSON.stringify(updatedList));
                 }
-               navigate('/');
+                navigate('/');
             }
         } catch (error) {
             setMessage('Failed to delete user.');

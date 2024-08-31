@@ -1,11 +1,24 @@
 /* Conteneur global */
 .container {
-    flex-wrap: wrap;
+    height: 100vh;
     display: flex;
-    /* grid-template-columns: repeat(3, 1fr); */
-    gap: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
     margin: 20px;
+    align-items: center;
+    justify-content: center;
 }
+
+
+@media (max-width: 768px) {
+    .container{
+        padding-top: 10%;
+    }
+
+}
+
+
+
 
 /* Style du conteneur utilisateur */
 .user {
@@ -78,6 +91,10 @@
     transition: background-color 0.3s ease;
 }
 
+.backBtn{
+    position: fixed;
+    top: 6rem;
+}
 
 .backBtn:hover{
     color: #646464;
