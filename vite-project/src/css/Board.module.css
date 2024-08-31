@@ -70,3 +70,26 @@
 .content > * {
   flex-grow: 1;
 }
+
+.singleContent {
+  width: 100%;
+}
+
+.toggleButton {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar,
+  .content {
+    flex: none;
+  }
+}

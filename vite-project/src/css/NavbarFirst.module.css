@@ -69,3 +69,35 @@
     color: white;
 }
 
+@media (max-width: 768px) {
+    .navbar {
+        justify-content: center; /* Center the navbar content */
+        flex-direction: column;
+    }
+
+    .navbar ul {
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        width: 100%; /* Ensure ul takes full width */
+    }
+
+    .navbar .logo {
+        display: none;
+    }
+
+    .titleWelcom {
+        display: none;
+    }
+
+    .navbar ul li {
+        margin: 0.5rem 0; /* Adjust margin for better spacing */
+    }
+
+    .navbar ul li a {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+        text-align: center; /* Center align the text within the links */
+    }
+
+  }

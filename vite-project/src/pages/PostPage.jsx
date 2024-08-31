@@ -95,7 +95,8 @@ function PostsPage() {
         localStorage.setItem('userPostsData', JSON.stringify([response.data, ...userPosts]))
       }
       if (localStorage.getItem('allPostsData') != null) {
-        localStorage.setItem('allPostsData', JSON.stringify([response.data, ...allPosts]))
+        const allPostDataForNow = JSON.parse(localStorage.getItem('allPostsData'));
+        localStorage.setItem('allPostsData', JSON.stringify([response.data, ...allPostDataForNow]))
       }
       setNewPostContent('');
       setNewPostTitle('');

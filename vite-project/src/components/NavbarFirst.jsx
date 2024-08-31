@@ -12,7 +12,7 @@ const NavbarFirst = () => {
     return (
         <nav className={navbarStyle.navbar}>
             <Link className={navbarStyle.title} to={`/board/${id}`}>  <img src={logo} alt="Logo" className={navbarStyle.logo} /></Link>
-            <p> Welcome.</p>
+            <p className={navbarStyle.titleWelcom}> Welcome.</p>
 
             <ul>
 
