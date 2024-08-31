@@ -16,7 +16,7 @@ function PostsPage() {
   const [newPostTitle, setNewPostTitle] = useState('');
   const [showCreatePost, setShowCreatePost] = useState(false);
   const [allowed_fetching, setAllowed_fetching] = useState(false);
-  const [page, setPage] = useState(localStorage.getItem('currentPage')=== null ? 1: JSON.parse(localStorage.getItem('currentPage')));
+  const [page, setPage] = useState(localStorage.getItem('currentPage') === null ? 1 : JSON.parse(localStorage.getItem('currentPage')));
   const limit = 3;
 
   useEffect(() => {
@@ -57,7 +57,7 @@ function PostsPage() {
   //this function change the flag allPosts everytime the user change the tab
   const onAllPosts = () => {
     setAllPostsFlag(!allPostsFlag);
-    if(allPostsFlag){
+    if (allPostsFlag) {
       window.location.reload();
     }
   };
@@ -144,37 +144,38 @@ function PostsPage() {
     <div>
       <Navbar onChangeTab={onAllPosts} />
 
-      <div className={styles.addPostContainer}>
-        <FontAwesomeIcon
-          icon={showCreatePost ? faXmark : faPlus}
-          className={styles.addPostIcon}
-          onClick={handleShowCreatePost}
-        />
-      </div>
-
-      {showCreatePost && (
-        <div className={styles.createPostForm}>
-          <input
-            type="text"
-            placeholder="Title..."
-            value={newPostTitle}
-            onChange={(e) => setNewPostTitle(e.target.value)}
-            className={styles.newPostInput}
-          />
-          <input
-            type="text"
-            placeholder=" new post or url..."
-            value={newPostContent}
-            onChange={(e) => setNewPostContent(e.target.value)}
-            className={styles.newPostInput}
-          />
-          <button onClick={handleCreatePost} className={styles.createPostButton}>
-            Post
-          </button>
-        </div>
-      )}
-
       <div className={styles.container}>
+        <div className={styles.addPostContainer}>
+          <FontAwesomeIcon
+            icon={showCreatePost ? faXmark : faPlus}
+            className={styles.addPostIcon}
+            onClick={handleShowCreatePost}
+          />
+        </div>
+
+        {showCreatePost && (
+          <div className={styles.createPostForm}>
+            <input
+              type="text"
+              placeholder="Title..."
+              value={newPostTitle}
+              onChange={(e) => setNewPostTitle(e.target.value)}
+              className={styles.newPostInput}
+            />
+            <input
+              type="text"
+              placeholder=" new post or url..."
+              value={newPostContent}
+              onChange={(e) => setNewPostContent(e.target.value)}
+              className={styles.newPostInput}
+            />
+            <button onClick={handleCreatePost} className={styles.createPostButton}>
+              Post
+            </button>
+          </div>
+        )}
+
+
         {allPostsFlag ?
           allPosts.map((post, index) => (
             <Post key={index} post={post} alreadyLiked={post.likes.length === 0 ? false : post.likes.includes(parseInt(id, 10))} deletePost={deletePost} DELETE_AUTHORIZATION={post.author === currentUserUsername || ADMIN_ACCESS} />
