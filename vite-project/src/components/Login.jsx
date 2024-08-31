@@ -33,6 +33,7 @@ const Login = () => {
                 const userData = response.data.user;
                 setUser(userData);
 
+                localStorage.clear();
                 localStorage.setItem('user', JSON.stringify(userData));
 
         
