@@ -104,6 +104,13 @@ ul {
 .inputTyping:focus{
   font-size: 1rem;
 }
+
+.inputTyping:focus, 
+.inputTyping:not(:placeholder-shown) { 
+    font-size: 1rem; 
+}
+
+
 .sendButton {
   background: none;
   border: none;
