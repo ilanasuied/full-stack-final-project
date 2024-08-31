@@ -3,7 +3,7 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import Userstyles from '../css/Users.module.css';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import defaultProfilePic from '../image/default_image.png'
 
 const User = () => {
@@ -11,7 +11,8 @@ const User = () => {
     const [message, setMessage] = useState('');
     const { id } = useParams();
     const location = useLocation();
-    const {username} = location.state;
+    const { username } = location.state;
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -37,22 +38,30 @@ const User = () => {
                 setMessage('User deleted successfully!');
 
                 //delete this user and his stuff from the localStorage
-    
+
                 //delete the user from the user page data 
-                const users = JSON.parse(localStorage.getItem('userPageData'));
-                const updatedUsers = users.filter(user => user.user_id !== parseInt(id));
-                localStorage.setItem('userPageData', JSON.stringify(updatedUsers));
+                if (localStorage.getItem('userPageData') != null) {
+                    const users = JSON.parse(localStorage.getItem('userPageData'));
+                    const updatedUsers = users.filter(user => user.user_id !== parseInt(id));
+                    localStorage.setItem('userPageData', JSON.stringify(updatedUsers));
+                }
+
 
                 //delete his post from the localStorage
-                const posts = JSON.parse(localStorage.getItem('allPostsData'));
-                const updatedPosts = posts.filter(post => post.author != username);
-                localStorage.setItem('allPostsData', JSON.stringify(updatedPosts));
+                if(localStorage.getItem('allPostsData')){
+                    const posts = JSON.parse(localStorage.getItem('allPostsData'));
+                    const updatedPosts = posts.filter(post => post.author != username);
+                    localStorage.setItem('allPostsData', JSON.stringify(updatedPosts));
+                }
+                
 
                 //delete his conversation from the list of conversation
-                const conversations = JSON.parse(localStorage.getItem('conversationsList'));
-                const updatedList = conversations.filter(conversations => conversations.user_id !== parseInt(id));
-                localStorage.setItem('conversationsList', JSON.stringify(updatedList));
-
+                if(localStorage.getItem('conversationsList')){
+                    const conversations = JSON.parse(localStorage.getItem('conversationsList'));
+                    const updatedList = conversations.filter(conversations => conversations.user_id !== parseInt(id));
+                    localStorage.setItem('conversationsList', JSON.stringify(updatedList));
+                }
+               navigate('/');
             }
         } catch (error) {
             setMessage('Failed to delete user.');
@@ -64,14 +73,14 @@ const User = () => {
         return <div className={Userstyles.loading}>Loading...</div>;
     }
 
-    const handleGoBack = ()=>{
+    const handleGoBack = () => {
         window.history.back();
     };
 
     return (
         <div className={Userstyles.user}>
             <div className={Userstyles.backBtn}>
-                <FontAwesomeIcon icon={faArrowLeft} onClick={handleGoBack}/>
+                <FontAwesomeIcon icon={faArrowLeft} onClick={handleGoBack} />
             </div>
             <div className={Userstyles.profile}>
                 <img
