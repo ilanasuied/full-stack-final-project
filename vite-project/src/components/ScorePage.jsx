@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, Link, useLocation } from 'react-router-dom';
+import scoreStyle from '../css/ScorePage.module.css';
 
 const ScorePage = () => {
     const [allScores, setAllScores] = useState([]);
@@ -37,35 +38,39 @@ const ScorePage = () => {
         fetchScores();
     }, [view, id]);
 
+    const userData = JSON.parse(localStorage.getItem('user'));
+    const currentUserUsername = userData.username;
+
     return (
-        <div>
-            <h1>Quiz Completed</h1>
+        <div className={scoreStyle.container}>
+
 
             {view === 'user' ? (
                 <div>
-                    <h2>Your Scores</h2>
-                    <ul>
+                    <h1 className={scoreStyle.h1}>Your Scores - {currentUserUsername}</h1>
+                    <ul className={scoreStyle.ul}>
                         {userScores.map((score, index) => (
-                            <li key={index}>{score.username}: {score.score}</li>
+                            <li className={scoreStyle.li} key={index}>score: {score.score} - date: {score.date}</li>
                         ))}
                     </ul>
                 </div>
             ) : (
                 <div>
-                    <h2>All Scores</h2>
-                    <ul>
+                    <h1 className={scoreStyle.h1}>All Scores</h1>
+                    <ul className={scoreStyle.ul}>
                         {allScores.map((score, index) => (
-                            <li key={index}>{score.username}: {score.score}</li>
+                            <li className={scoreStyle.li} key={index}>{score.username} - score: {score.score}</li>
                         ))}
                     </ul>
                 </div>
             )}
 
             <Link to={`/board/${id}`}>
-                <button>Go to Dashboard</button>
+                <button className={scoreStyle.button}>Go to Dashboard</button>
             </Link>
         </div>
     );
 };
 
 export default ScorePage;
+

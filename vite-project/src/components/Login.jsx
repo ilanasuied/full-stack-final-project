@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import logInStyles from '../css/Login.module.css';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -87,6 +87,7 @@ const Login = () => {
                 <button type="submit" className={logInStyles.loginBnt}>Login</button>
             </form>
             <p className={logInStyles.textLogin}>{message}</p>
+            <p>Already have an account? <Link to="/signUp">Sign Up</Link>.</p>
         </div>
     );
 };

@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import SignUpStyles from '../css/SignUp.module.css';
 import axios from 'axios';
 import { format } from 'date-fns';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+
 
 const SignUp = () => {
     const [username, setUsername] = useState('');
@@ -57,9 +58,9 @@ const SignUp = () => {
 
     return (
         <div className={SignUpStyles.container}>
-            <h1>Sign Up</h1>
-            <form onSubmit={handleSignUp}>
-                <input
+            <h1 className={SignUpStyles.h1}>Sign Up</h1>
+            <form onSubmit={handleSignUp} className={SignUpStyles.form}>
+                <input className={SignUpStyles.input}
                     type='text'
                     placeholder='Username'
                     value={username}
@@ -67,7 +68,7 @@ const SignUp = () => {
                     required
                 />
 
-                <input
+                <input className={SignUpStyles.input}
                     type='email'
                     placeholder='Email'
                     value={email}
@@ -75,7 +76,7 @@ const SignUp = () => {
                     required
                 />
 
-                <input
+                <input className={SignUpStyles.input}
                     type='password'
                     placeholder='Password'
                     value={password}
@@ -84,6 +85,7 @@ const SignUp = () => {
                 />
                 
                 <button type='submit' className={SignUpStyles.signUpBtn}>Submit</button>
+                <p>Already have an account? <Link to="/login">Log In</Link>.</p>
             </form>
             <p className={SignUpStyles.textSignUp}>{message}</p>
         </div>
