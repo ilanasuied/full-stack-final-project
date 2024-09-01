@@ -50,7 +50,7 @@ const ScorePage = () => {
                     <h1 className={scoreStyle.h1}>Your Scores - {currentUserUsername}</h1>
                     <ul className={scoreStyle.ul}>
                         {userScores.map((score, index) => (
-                            <li className={scoreStyle.li} key={index}>score: {score.score} - date: {score.date}</li>
+                            <li className={scoreStyle.li} key={index}>score: {score.score} </li>
                         ))}
                     </ul>
                 </div>

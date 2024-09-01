@@ -78,10 +78,9 @@ const Quizz = () => {
       console.log('Soumission du score en cours...');
       if (quizFinished) {
         try {
-          console.log('Données à soumettre:', { userId: id, username, score });
+         
           const response = await axios.post(`http://localhost:3001/api/scores/${id}`, {
             userId: id,
-            username,
             score
           });
           

@@ -57,12 +57,12 @@ export const deleteScore = async (req, res) => {
 
 export const handleScores = async (req, res) => {
   try {
-    const { userId, username, score } = req.body;
+    const { userId,score } = req.body;
     const connection = await createConnection();
     
     const [result] = await connection.query(
-      `INSERT INTO scores (userId, username, score) VALUES (?, ?, ?)`,
-      [userId, username, score]
+      `INSERT INTO scores (id, score) VALUES (?, ?)`,
+      [userId, score]
     );
     
     const newScoreId = result.insertId;
