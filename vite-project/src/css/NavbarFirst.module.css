@@ -71,7 +71,7 @@
 
 @media (max-width: 768px) {
     .navbar {
-        justify-content: center; /* Center the navbar content */
+        justify-content: center; 
         flex-direction: column;
     }
 
@@ -79,7 +79,7 @@
         flex-wrap: wrap;
         align-items: center;
         justify-content: center;
-        width: 100%; /* Ensure ul takes full width */
+        width: 100%; 
     }
 
     .navbar .logo {
@@ -91,13 +91,13 @@
     }
 
     .navbar ul li {
-        margin: 0.5rem 0; /* Adjust margin for better spacing */
+        margin: 0.5rem 0; 
     }
 
     .navbar ul li a {
         font-size: 1rem;
         padding: 0.5rem 1rem;
-        text-align: center; /* Center align the text within the links */
+        text-align: center; 
     }
 
   }

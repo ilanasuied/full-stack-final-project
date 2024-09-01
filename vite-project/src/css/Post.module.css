@@ -34,7 +34,7 @@
 
 .actions {
   display: flex;
-  gap: 15px; /* Ajoute de l'espace entre les icônes */
+  gap: 15px; 
   margin-top: 10px;
 }
 
@@ -50,6 +50,6 @@
 
 @media (max-width: 768px) {
   .post {
-    max-width: 90%; /* Ajuste la largeur maximale sur les petits écrans */
+    max-width: 90%;
   }
 }

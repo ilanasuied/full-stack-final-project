@@ -52,6 +52,27 @@ export const getScoreById = async (req, res) => {
 export const deleteScore = async (req, res) => {
 
 };
-export const handleScores = async (req, res) => {
 
+
+
+export const handleScores = async (req, res) => {
+  try {
+    const { userId, username, score } = req.body;
+    const connection = await createConnection();
+    
+    const [result] = await connection.query(
+      `INSERT INTO scores (userId, username, score) VALUES (?, ?, ?)`,
+      [userId, username, score]
+    );
+    
+    const newScoreId = result.insertId;
+
+    res.status(201).json({scoreId: newScoreId });
+  } catch (error) {
+    console.error('Error', error);
+    res.status(500).json({ message: 'Server Error' });
+  }
 };
+
+
+

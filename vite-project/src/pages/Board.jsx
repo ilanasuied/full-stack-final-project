@@ -8,14 +8,14 @@ import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
 
 function Board() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const [currentPage, setCurrentPage] = useState('post'); // 'post' or 'message'
+  const [currentPage, setCurrentPage] = useState('post');
 
   useEffect(() => {
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth <= 900);
     };
 
-    handleResize(); // Check on mount
+    handleResize();
     window.addEventListener('resize', handleResize);
 
     return () => {

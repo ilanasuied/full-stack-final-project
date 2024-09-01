@@ -29,12 +29,12 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* Centrage vertical des éléments */
+    justify-content: center;
     border-radius: 1em;
     border: 0.1em solid white;
-    background-color: rgba(255, 255, 255, 0.2); /* Définir la transparence ici */
+    background-color: rgba(255, 255, 255, 0.2); 
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
-    padding: 1em; /* Padding pour espacement intérieur */
+    padding: 1em;
     background-color: white;
 }
 
@@ -47,21 +47,21 @@ form {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centrage horizontal des inputs */
+    align-items: center; 
 }
 
 .inputLogin {
     border: none;
     border-radius: 0.5em;
     height: 2em;
-    width: 70%; /* Largeur fixée à 70% */
+    width: 70%;
     text-align: center;
     padding: 1.1em;
     font-size: 0.9em;
     font-weight: bolder;
     color: black;
     transition: font-size 0.3s ease-in-out;
-    margin-bottom: 1em; /* Espacement entre les inputs */
+    margin-bottom: 1em; 
 }
 
 .inputLogin:focus, 
@@ -80,7 +80,7 @@ form {
     cursor: pointer;
     background-color: #323232;
     color: white;
-    margin-top: 1em; /* Espacement au-dessus du bouton */
+    margin-top: 1em;
 }
 
 .loginBnt:hover {

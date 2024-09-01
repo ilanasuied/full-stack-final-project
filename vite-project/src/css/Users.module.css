@@ -1,4 +1,4 @@
-/* Conteneur global */
+
 .container {
     height: 100vh;
     display: flex;
@@ -17,10 +17,6 @@
 
 }
 
-
-
-
-/* Style du conteneur utilisateur */
 .user {
     border-radius: 12px;
     padding: 100px;
@@ -40,7 +36,7 @@
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
 }
 
-/* Style de la photo de profil */
+
 .profile {
     display: flex;
     flex-direction: column;
@@ -56,7 +52,7 @@
     margin-bottom: 10px;
 }
 
-/* Style du nom d'utilisateur */
+
 .author {
     font-weight: bold;
     font-size: 1.75rem;
@@ -64,7 +60,7 @@
     margin-bottom: 10px;
 }
 
-/* Style des détails de l'utilisateur */
+
 .userContent {
     border: 1px solid #ddd;
     padding: 15px;
@@ -74,7 +70,6 @@
     width: 100%;
 }
 
-/* Style du bouton de suppression */
 .deleteUser {
     display: flex;
     justify-content: center;
@@ -105,7 +100,7 @@
     color: #ec2b15;
 }
 
-/* Style des messages */
+
 .message {
     color: #e74c3c;
     margin-top: 10px;

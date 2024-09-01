@@ -1,4 +1,4 @@
-/* Comments.module.css */
+
 
 .commentsContainer {
   padding: 20px;
@@ -15,7 +15,7 @@
 
 .comment {
   display: flex;
-  justify-content: space-between; /* Espace entre le texte et l'icône */
+  justify-content: space-between;
   align-items: center;
   padding: 10px;
   margin-bottom: 10px;
@@ -27,14 +27,14 @@
 }
 
 .comment:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre plus prononcée au survol */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
 }
 
 .commentText {
   font-size: 1rem;
   color: #333;
   flex-grow: 1;
-  margin-right: 15px; /* Espace entre le texte et l'icône */
+  margin-right: 15px; 
 }
 
 .deleteIcon {
@@ -45,7 +45,7 @@
 }
 
 .deleteIcon:hover {
-  color: #e74c3c; /* Devient rouge au survol */
+  color: #e74c3c; 
 }
 
 .newCommentInput {

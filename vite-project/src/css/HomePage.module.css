@@ -1,4 +1,4 @@
-/* Styles globaux */
+
 .container {
     display: flex;
     flex-direction: column;
@@ -10,53 +10,53 @@
     position: relative;
 }
 
-/* Texte superposé */
+
 .overlayText {
     position: absolute;
-    top: 2em;  /* Ajuste la position du texte pour les petits écrans */
+    top: 2em;  
     left: 50%;
     transform: translateX(-50%);
-    font-size: 2.5rem;  /* Réduit la taille de la police pour une meilleure lisibilité */
+    font-size: 2.5rem;  
     font-weight: bold;
     text-align: center;
     z-index: 1;
     color: #DDD0C8;
-    padding: 0 10px;  /* Ajoute du padding pour éviter que le texte ne touche les bords */
+    padding: 0 10px; 
 }
 
-/* Wrapper des boutons */
+
 .buttons {
     position: absolute;
-    top: calc(50% + 3em);  /* Ajuste la position des boutons en fonction de la taille du texte */
+    top: calc(50% + 3em); 
     display: flex;
-    flex-direction: column;  /* Aligne les boutons verticalement pour les petits écrans */
+    flex-direction: column; 
     justify-content: center;
-    align-items: center;  /* Centre les boutons horizontalement */
+    align-items: center;  
     width: 100%; 
     z-index: 1;
 }
 
-/* Styles des boutons */
+
 .button {
     background-color: black;
     color: white;
     border: none;
     border-radius: 5px;
     padding: 10px 20px;
-    margin: 5px 0;  /* Ajuste la marge pour les écrans plus petits */
+    margin: 5px 0; 
     cursor: pointer;
-    font-size: 16px;  /* Taille de la police */
+    font-size: 16px; 
     transition: background-color 0.3s ease;
-    text-align: center;  /* Aligne le texte des boutons au centre */
+    text-align: center;  
 }
 
-/* Effet au survol des boutons */
+
 .button:hover {
     background-color: #DDD0C8;
     color: white;
 }
 
-/* Wrapper de la vidéo */
+
 .videoWrapper {
     position: absolute;
     top: 0;
@@ -66,7 +66,7 @@
     overflow: hidden;
 }
 
-/* Styles de la vidéo */
+
 .video {
     position: absolute;
     top: 0;
@@ -76,22 +76,22 @@
     object-fit: cover; 
 }
 
-/* Media Query pour les écrans de téléphone */
+
 @media (max-width: 768px) {
     .overlayText {
-        font-size: 2rem;  /* Réduit encore la taille du texte pour les écrans très petits */
-        top: 1em;  /* Ajuste la position du texte pour les petits écrans */
+        font-size: 2rem; 
+        top: 1em; 
     }
     
     .buttons {
-        top: calc(50% + 2em);  /* Ajuste la position des boutons pour éviter le chevauchement */
-        flex-direction: column;  /* Assure que les boutons sont empilés verticalement */
-        align-items: center;  /* Centre les boutons horizontalement */
+        top: calc(50% + 2em); 
+        flex-direction: column; 
+        align-items: center;  
     }
     
     .button {
-        font-size: 14px;  /* Ajuste la taille de la police pour les petits écrans */
-        padding: 8px 12px;  /* Réduit le padding des boutons */
+        font-size: 14px;  
+        padding: 8px 12px;  
     }
 }
 

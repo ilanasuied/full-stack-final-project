@@ -23,16 +23,16 @@
 }
 
 .sidebar:hover {
-  transform: translateX(10px); /* Déplacement au survol */
+  transform: translateX(10px);
   box-shadow: 12px 0 20px rgba(0, 0, 0, 0.5);
 }
 
 .content {
   flex-grow: 1;
   padding: 20px;
-  overflow-y: auto; /* Activer le défilement vertical */
-  scrollbar-width: none; /* Pour Firefox */
-  -ms-overflow-style: none;  /* Pour Internet Explorer et Edge */
+  overflow-y: auto; 
+  scrollbar-width: none;
+  -ms-overflow-style: none;  
   margin: 20px 50px 20px 100px;
   background-color:#DDD0C8;
   border-radius: 12px;
@@ -45,10 +45,9 @@
 
 
 
-/* Pour les navigateurs basés sur WebKit */
 .content::-webkit-scrollbar {
-  width: 0;  /* Masquer la barre de défilement verticale */
-  height: 0; /* Masquer la barre de défilement horizontale */
+  width: 0; 
+  height: 0; 
 }
 
 .content h1 {
