@@ -16,12 +16,9 @@ const Quizz = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  useEffect(() => {
-    console.log('Le composant Quizz s\'est monté');
-  }, []);
 
   useEffect(() => {
-    console.log('useEffect pour récupérer le nom d\'utilisateur est exécuté');
+ 
     const userData = localStorage.getItem('user');
     
     if (userData) {
@@ -29,18 +26,18 @@ const Quizz = () => {
         const userObject = JSON.parse(userData);
         const retrievedUsername = userObject.username;
         setUsername(retrievedUsername);
-        console.log('Nom d\'utilisateur récupéré:', retrievedUsername);
+        console.log('Retrieved username:', retrievedUsername);
       } catch (error) {
-        console.error('Erreur lors de la récupération du nom d\'utilisateur:', error);
+        console.error('Error retrieving username:', error);
       }
     } else {
-      console.log('Aucun utilisateur trouvé dans le localStorage');
+      console.log('No users found in localStorage');
     }
   }, []);
 
   const handleOptionClick = (option) => { 
     if (quizFinished) {
-      console.log('Le quiz est déjà terminé. Aucune option ne peut être sélectionnée.');
+     
       return;
     }
 
@@ -48,79 +45,65 @@ const Quizz = () => {
     if (option === questions[currentQuestion].answer) {
       setScore(score + 1);
       setFeedback('Correct!');
-      console.log('Bonne réponse sélectionnée:', option);
+     
     } else {
       setFeedback(`Incorrect! ${questions[currentQuestion].explanation}`);
-      console.log('Mauvaise réponse sélectionnée:', option);
+      
     }
   };
 
-  const handleNextQuestion = () => { 
+  const handleNextQuestion = () => {
     if (selectedOption) {
       setFeedback('');
       setSelectedOption('');
-      
+  
       if (currentQuestion < questions.length - 1) {
         setCurrentQuestion(currentQuestion + 1);
         setNumber(number + 1);
-        console.log('Passage à la question suivante:', number);
       } else {
+        console.log('Quiz terminé, mise à jour de quizFinished à true');
         setQuizFinished(true);
-        console.log('Le quiz est terminé');
       }
     } else {
-      setFeedback('Veuillez sélectionner une option avant de passer à la question suivante.');
+      setFeedback('Please select an option before moving on to the next question.');
     }
   };
-
+  
   useEffect(() => {
-    const submitScore = async () => {  
-      console.log('Soumission du score en cours...');
-      if (quizFinished) {
-        try {
-         
-          const response = await axios.post(`http://localhost:3001/api/scores/${id}`, {
-            userId: id,
-            score
-          });
-          
-          console.log('Réponse du serveur:', response.data);
+    const submitScore = async () => {
+  if (quizFinished) {
+    console.log('Soumission du score en cours...');
+    console.log('Données envoyées:', { userId: id, score });
 
-          const userScoresData = JSON.parse(localStorage.getItem('userScoresData')) || [];
-          console.log('Données avant ajout:', userScoresData);
-          const newUserScore = { userId: id, username, score };
-          localStorage.setItem('userScoresData', JSON.stringify([...userScoresData, newUserScore]));
-          console.log('Données après ajout:', JSON.parse(localStorage.getItem('userScoresData')));
+    try {
+      const response = await axios.post(`http://localhost:3001/api/scores/${id}`, {
+        userId: id,
+        score
+      });
 
-          console.log('Score soumis avec succès');
-          navigate(`/scores/${id}`);
-        } catch (error) {
-          console.error('Erreur lors de la soumission du score:', error);
-          alert('Erreur lors de la soumission du score.');
-        }
-      }
-    };
+      console.log('Server response:', response.data);
 
-    submitScore();
-  }, [quizFinished, navigate, id, score, username]);
+      const userScoresData = JSON.parse(localStorage.getItem('userScoresData')) || [];
+      const newUserScore = { userId: id, username, score };
+      localStorage.setItem('userScoresData', JSON.stringify([...userScoresData, newUserScore]));
 
-  useEffect(() => {
-    const fetchScoresFromAPI = async () => {
-      console.log('Chargement des scores depuis l\'API');
-      try {
-        const response = await axios.get('http://localhost:3001/api/scores');
-        console.log('Scores récupérés depuis l\'API:', response.data);
-        localStorage.setItem('allScoresData', JSON.stringify(response.data));
-        console.log('Scores stockés dans le localStorage');
-      } catch (error) {
-        console.error('Erreur lors de la récupération des scores:', error);
-      }
-    };
-
-    if (!localStorage.getItem('allScoresData')) {
-      fetchScoresFromAPI();
+      console.log('Score soumis avec succès');
+      console.log('Navigating to /board/${id}');
+      navigate(`/board/${id}`);
+    } catch (error) {
+      console.error('Erreur lors de la soumission du score:', error.response ? error.response.data : error.message);
     }
-  }, []);
+  }
+};
+
+    
+    
+    
+  
+    submitScore();
+  }, [quizFinished, id, score, username, navigate]);
+  
+  
 
   return (
     <>
